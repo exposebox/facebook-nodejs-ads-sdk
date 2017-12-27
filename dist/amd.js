@@ -186,7 +186,7 @@ var FacebookRequestError = function (_FacebookError) {
   function FacebookRequestError(response, method, url, data) {
     classCallCheck(this, FacebookRequestError);
 
-    var error = response.body.error;
+    var error = response.body.error || response.body;
     var message = error.error_user_msg ? error.error_user_title + ': ' + error.error_user_msg : error.message;
 
     var _this = possibleConstructorReturn(this, (FacebookRequestError.__proto__ || Object.getPrototypeOf(FacebookRequestError)).call(this, message));
