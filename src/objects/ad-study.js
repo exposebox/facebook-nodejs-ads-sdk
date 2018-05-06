@@ -7,6 +7,7 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
+import AbstractObject from './../abstract-object';
 import AdStudyObjective from './ad-study-objective';
 
 /**
@@ -34,6 +35,18 @@ export default class AdStudy extends AbstractCrudObject {
     });
   }
 
+  static get AudienceType (): Object {
+    return Object.freeze({
+      most_responsive: 'MOST_RESPONSIVE',
+      not_most_responsive: 'NOT_MOST_RESPONSIVE'
+    });
+  }
+  static get Role (): Object {
+    return Object.freeze({
+      admin: 'ADMIN',
+      analyst: 'ANALYST'
+    });
+  }
   static get Type (): Object {
     return Object.freeze({
       lift: 'LIFT',
@@ -41,17 +54,49 @@ export default class AdStudy extends AbstractCrudObject {
     });
   }
 
+  createCustomAudience (fields, params): AdStudy {
+    return this.createEdge(
+      '/customaudiences',
+      fields,
+      params,
+      AdStudy
+    );
+  }
+
   createObjective (fields, params): AdStudyObjective {
     return this.createEdge(
       '/objectives',
       fields,
+      params,
+      AdStudyObjective
+    );
+  }
+
+  deleteUserPermissions (params): AbstractObject {
+    return super.deleteEdge(
+      '/userpermissions',
       params
+    );
+  }
+
+  createUserPermission (fields, params): AdStudy {
+    return this.createEdge(
+      '/userpermissions',
+      fields,
+      params,
+      AdStudy
     );
   }
 
   get (fields, params): AdStudy {
     return this.read(
       fields,
+      params
+    );
+  }
+
+  update (fields, params): AdStudy {
+    return super.update(
       params
     );
   }

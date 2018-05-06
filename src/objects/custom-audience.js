@@ -63,7 +63,8 @@ export default class CustomAudience extends AbstractCrudObject {
       flight: 'FLIGHT',
       home_listing: 'HOME_LISTING',
       hotel: 'HOTEL',
-      vehicle: 'VEHICLE'
+      vehicle: 'VEHICLE',
+      vehicle_offer: 'VEHICLE_OFFER'
     });
   }
   static get Subtype (): Object {
@@ -106,7 +107,8 @@ export default class CustomAudience extends AbstractCrudObject {
     return this.createEdge(
       '/adaccounts',
       fields,
-      params
+      params,
+      AdAccount
     );
   }
 
@@ -151,7 +153,8 @@ export default class CustomAudience extends AbstractCrudObject {
     return this.createEdge(
       '/users',
       fields,
-      params
+      params,
+      User
     );
   }
 
