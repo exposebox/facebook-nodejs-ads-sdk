@@ -100,7 +100,7 @@ export default class Http {
       method: method,
       uri: url,
       json: !useMultipartFormData,
-      headers: {'User-Agent': `Facebook-JS-Ads-SDK/${Api.VERSION}`},
+      headers: {'User-Agent': `fbbizsdk-nodejs-${Api.VERSION}`},
       body: Object
     };
     // Prevent null or undefined input
@@ -119,10 +119,6 @@ export default class Http {
     }
 
     return requestPromise(options).catch((response: Object) => {
-      response = {
-        body: response.error ? response.error : response,
-        status: response.statusCode
-      };
       throw response;
     });
   }
