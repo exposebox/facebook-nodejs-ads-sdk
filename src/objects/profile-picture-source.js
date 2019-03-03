@@ -24,17 +24,16 @@ export default class ProfilePictureSource extends AbstractCrudObject {
       right: 'right',
       top: 'top',
       url: 'url',
-      width: 'width'
+      width: 'width',
+      id: 'id'
     });
   }
 
   static get Type (): Object {
     return Object.freeze({
-      small: 'small',
-      normal: 'normal',
       album: 'album',
-      large: 'large',
-      square: 'square'
+      small: 'small',
+      thumbnail: 'thumbnail'
     });
   }
 }

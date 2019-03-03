@@ -32,4 +32,10 @@ export default class URL extends AbstractCrudObject {
       params
     );
   }
+
+  update (fields, params): URL {
+    return super.update(
+      params
+    );
+  }
 }

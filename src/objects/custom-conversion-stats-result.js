@@ -18,7 +18,8 @@ export default class CustomConversionStatsResult extends AbstractCrudObject {
     return Object.freeze({
       aggregation: 'aggregation',
       data: 'data',
-      timestamp: 'timestamp'
+      timestamp: 'timestamp',
+      id: 'id'
     });
   }
 

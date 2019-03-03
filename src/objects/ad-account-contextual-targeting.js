@@ -16,6 +16,14 @@ import {AbstractCrudObject} from './../abstract-crud-object';
 export default class AdAccountContextualTargeting extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
+      description: 'description',
+      enabled_in_ui: 'enabled_in_ui',
+      id: 'id',
+      key: 'key',
+      name: 'name',
+      parent: 'parent',
+      path: 'path',
+      type: 'type'
     });
   }
 }

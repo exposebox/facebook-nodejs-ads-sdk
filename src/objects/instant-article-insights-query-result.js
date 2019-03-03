@@ -19,31 +19,31 @@ export default class InstantArticleInsightsQueryResult extends AbstractCrudObjec
       breakdowns: 'breakdowns',
       name: 'name',
       time: 'time',
-      value: 'value'
+      value: 'value',
+      id: 'id'
     });
   }
 
   static get Breakdown (): Object {
     return Object.freeze({
-      no_breakdown: 'no_breakdown',
-      platform: 'platform',
       age: 'age',
-      region: 'region',
       country: 'country',
-      is_shared_by_ia_owner: 'is_shared_by_ia_owner',
       gender: 'gender',
       gender_and_age: 'gender_and_age',
-      is_organic: 'is_organic'
+      is_organic: 'is_organic',
+      is_shared_by_ia_owner: 'is_shared_by_ia_owner',
+      no_breakdown: 'no_breakdown',
+      platform: 'platform',
+      region: 'region'
     });
   }
   static get Period (): Object {
     return Object.freeze({
       day: 'day',
-      week: 'week',
       days_28: 'days_28',
-      month: 'month',
       lifetime: 'lifetime',
-      total_over_range: 'total_over_range'
+      month: 'month',
+      week: 'week'
     });
   }
 }

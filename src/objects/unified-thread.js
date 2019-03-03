@@ -7,6 +7,7 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
+import AbstractObject from './../abstract-object';
 
 /**
  * UnifiedThread
@@ -32,6 +33,25 @@ export default class UnifiedThread extends AbstractCrudObject {
       updated_time: 'updated_time',
       wallpaper: 'wallpaper'
     });
+  }
+
+  getMessages (fields, params, fetchFirstPage = true): AbstractObject {
+    return this.getEdge(
+      AbstractObject,
+      fields,
+      params,
+      fetchFirstPage,
+      '/messages'
+    );
+  }
+
+  createMessage (fields, params): AbstractObject {
+    return this.createEdge(
+      '/messages',
+      fields,
+      params
+
+    );
   }
 
   get (fields, params): UnifiedThread {

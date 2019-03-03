@@ -7,6 +7,10 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
+import AbstractObject from './../abstract-object';
+import AdAccount from './ad-account';
+import AdSet from './ad-set';
+import Campaign from './campaign';
 
 /**
  * AdStudyCell
@@ -33,18 +37,54 @@ export default class AdStudyCell extends AbstractCrudObject {
       facebook_instagram: 'FACEBOOK_INSTAGRAM',
       facebook_news_feed: 'FACEBOOK_NEWS_FEED',
       facebook_news_feed_in_stream_video: 'FACEBOOK_NEWS_FEED_IN_STREAM_VIDEO',
-      in_stream_video: 'IN_STREAM_VIDEO',
+      high_frequency: 'HIGH_FREQUENCY',
       instagram: 'INSTAGRAM',
+      in_stream_video: 'IN_STREAM_VIDEO',
+      low_frequency: 'LOW_FREQUENCY',
+      medium_frequency: 'MEDIUM_FREQUENCY',
       mobile_optimized_video: 'MOBILE_OPTIMIZED_VIDEO',
       page_post_engagement: 'PAGE_POST_ENGAGEMENT',
       reach: 'REACH',
       tv_commercial: 'TV_COMMERCIAL',
       tv_facebook: 'TV_FACEBOOK',
-      video_view_optimization: 'VIDEO_VIEW_OPTIMIZATION',
-      low_frequency: 'LOW_FREQUENCY',
-      medium_frequency: 'MEDIUM_FREQUENCY',
-      high_frequency: 'HIGH_FREQUENCY'
+      video_view_optimization: 'VIDEO_VIEW_OPTIMIZATION'
     });
+  }
+
+  getAdAccounts (fields, params, fetchFirstPage = true): AdAccount {
+    return this.getEdge(
+      AdAccount,
+      fields,
+      params,
+      fetchFirstPage,
+      '/adaccounts'
+    );
+  }
+
+  getAdSets (fields, params, fetchFirstPage = true): AdSet {
+    return this.getEdge(
+      AdSet,
+      fields,
+      params,
+      fetchFirstPage,
+      '/adsets'
+    );
+  }
+
+  getCampaigns (fields, params, fetchFirstPage = true): Campaign {
+    return this.getEdge(
+      Campaign,
+      fields,
+      params,
+      fetchFirstPage,
+      '/campaigns'
+    );
+  }
+
+  delete (fields, params): AbstractObject {
+    return super.delete(
+      params
+    );
   }
 
   get (fields, params): AdStudyCell {

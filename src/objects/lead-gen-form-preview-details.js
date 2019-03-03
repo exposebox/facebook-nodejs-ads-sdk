@@ -26,7 +26,8 @@ export default class LeadGenFormPreviewDetails extends AbstractCrudObject {
       phone_number_inline_context_text: 'phone_number_inline_context_text',
       review_your_info_text: 'review_your_info_text',
       slide_to_submit_text: 'slide_to_submit_text',
-      submit_button_text: 'submit_button_text'
+      submit_button_text: 'submit_button_text',
+      id: 'id'
     });
   }
 }

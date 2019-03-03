@@ -8,6 +8,12 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import AdPlacePageSet from './ad-place-page-set';
+import AdsPixel from './ads-pixel';
+import Application from './application';
+import CustomConversion from './custom-conversion';
+import OfflineConversionDataSet from './offline-conversion-data-set';
+import OffsitePixel from './offsite-pixel';
 
 /**
  * AdStudyObjective
@@ -27,26 +33,78 @@ export default class AdStudyObjective extends AbstractCrudObject {
     });
   }
 
-  static get Breakdowns (): Object {
-    return Object.freeze({
-      age: 'age',
-      cell_id: 'cell_id',
-      gender: 'gender',
-      country: 'country'
-    });
-  }
   static get Type (): Object {
     return Object.freeze({
-      sales: 'SALES',
-      nonsales: 'NONSALES',
-      mae: 'MAE',
-      telco: 'TELCO',
-      ftl: 'FTL',
-      mai: 'MAI',
-      partner: 'PARTNER',
+      brand: 'BRAND',
       brandlift: 'BRANDLIFT',
-      brand: 'BRAND'
+      ftl: 'FTL',
+      mae: 'MAE',
+      mai: 'MAI',
+      nonsales: 'NONSALES',
+      partner: 'PARTNER',
+      sales: 'SALES',
+      telco: 'TELCO'
     });
+  }
+
+  getAdPlacePageSets (fields, params, fetchFirstPage = true): AdPlacePageSet {
+    return this.getEdge(
+      AdPlacePageSet,
+      fields,
+      params,
+      fetchFirstPage,
+      '/ad_place_page_sets'
+    );
+  }
+
+  getAdsPixels (fields, params, fetchFirstPage = true): AdsPixel {
+    return this.getEdge(
+      AdsPixel,
+      fields,
+      params,
+      fetchFirstPage,
+      '/adspixels'
+    );
+  }
+
+  getApplications (fields, params, fetchFirstPage = true): Application {
+    return this.getEdge(
+      Application,
+      fields,
+      params,
+      fetchFirstPage,
+      '/applications'
+    );
+  }
+
+  getCustomConversions (fields, params, fetchFirstPage = true): CustomConversion {
+    return this.getEdge(
+      CustomConversion,
+      fields,
+      params,
+      fetchFirstPage,
+      '/customconversions'
+    );
+  }
+
+  getOfflineConversionDataSets (fields, params, fetchFirstPage = true): OfflineConversionDataSet {
+    return this.getEdge(
+      OfflineConversionDataSet,
+      fields,
+      params,
+      fetchFirstPage,
+      '/offline_conversion_data_sets'
+    );
+  }
+
+  getOffsitePixels (fields, params, fetchFirstPage = true): OffsitePixel {
+    return this.getEdge(
+      OffsitePixel,
+      fields,
+      params,
+      fetchFirstPage,
+      '/offsitepixels'
+    );
   }
 
   delete (fields, params): AbstractObject {

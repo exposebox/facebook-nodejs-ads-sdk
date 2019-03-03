@@ -18,7 +18,8 @@ export default class AdRuleExecutionOptions extends AbstractCrudObject {
     return Object.freeze({
       field: 'field',
       operator: 'operator',
-      value: 'value'
+      value: 'value',
+      id: 'id'
     });
   }
 

@@ -18,7 +18,8 @@ export default class ProductDaEventSamplesBatch extends AbstractCrudObject {
     return Object.freeze({
       samples: 'samples',
       time_start: 'time_start',
-      time_stop: 'time_stop'
+      time_stop: 'time_stop',
+      id: 'id'
     });
   }
 
@@ -30,13 +31,13 @@ export default class ProductDaEventSamplesBatch extends AbstractCrudObject {
   }
   static get Event (): Object {
     return Object.freeze({
-      viewcontent: 'ViewContent',
       addtocart: 'AddToCart',
-      purchase: 'Purchase',
+      addtowishlist: 'AddToWishlist',
       initiatecheckout: 'InitiateCheckout',
-      search: 'Search',
       lead: 'Lead',
-      addtowishlist: 'AddToWishlist'
+      purchase: 'Purchase',
+      search: 'Search',
+      viewcontent: 'ViewContent'
     });
   }
 }

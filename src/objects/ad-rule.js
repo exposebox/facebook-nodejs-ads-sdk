@@ -33,10 +33,19 @@ export default class AdRule extends AbstractCrudObject {
 
   static get Status (): Object {
     return Object.freeze({
-      enabled: 'ENABLED',
+      deleted: 'DELETED',
       disabled: 'DISABLED',
-      deleted: 'DELETED'
+      enabled: 'ENABLED'
     });
+  }
+
+  createExecute (fields, params): AbstractObject {
+    return this.createEdge(
+      '/execute',
+      fields,
+      params
+
+    );
   }
 
   getHistory (fields, params, fetchFirstPage = true): AdRuleHistory {
@@ -46,6 +55,15 @@ export default class AdRule extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/history'
+    );
+  }
+
+  createPreview (fields, params): AdRule {
+    return this.createEdge(
+      '/preview',
+      fields,
+      params,
+      AdRule
     );
   }
 

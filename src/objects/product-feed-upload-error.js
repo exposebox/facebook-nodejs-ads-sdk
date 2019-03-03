@@ -7,7 +7,8 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
-import AbstractObject from './../abstract-object';
+import ProductFeedUploadErrorSample from './product-feed-upload-error-sample';
+import ProductFeedRuleSuggestion from './product-feed-rule-suggestion';
 
 /**
  * ProductFeedUploadError
@@ -17,6 +18,7 @@ import AbstractObject from './../abstract-object';
 export default class ProductFeedUploadError extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
+      affected_surfaces: 'affected_surfaces',
       description: 'description',
       error_type: 'error_type',
       id: 'id',
@@ -26,6 +28,13 @@ export default class ProductFeedUploadError extends AbstractCrudObject {
     });
   }
 
+  static get AffectedSurfaces (): Object {
+    return Object.freeze({
+      dynamic_ads: 'Dynamic Ads',
+      marketplace: 'Marketplace',
+      us_marketplace: 'US Marketplace'
+    });
+  }
   static get Severity (): Object {
     return Object.freeze({
       fatal: 'fatal',
@@ -33,13 +42,23 @@ export default class ProductFeedUploadError extends AbstractCrudObject {
     });
   }
 
-  getSamples (fields, params, fetchFirstPage = true): AbstractObject {
+  getSamples (fields, params, fetchFirstPage = true): ProductFeedUploadErrorSample {
     return this.getEdge(
-      AbstractObject,
+      ProductFeedUploadErrorSample,
       fields,
       params,
       fetchFirstPage,
       '/samples'
+    );
+  }
+
+  getSuggestedRules (fields, params, fetchFirstPage = true): ProductFeedRuleSuggestion {
+    return this.getEdge(
+      ProductFeedRuleSuggestion,
+      fields,
+      params,
+      fetchFirstPage,
+      '/suggested_rules'
     );
   }
 

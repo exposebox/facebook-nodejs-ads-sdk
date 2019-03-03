@@ -8,7 +8,12 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Profile from './profile';
+import User from './user';
+import NullNode from './null-node';
+import Comment from './comment';
 import Photo from './photo';
+import AdVideo from './ad-video';
 
 /**
  * Event
@@ -24,6 +29,7 @@ export default class Event extends AbstractCrudObject {
       cover: 'cover',
       declined_count: 'declined_count',
       description: 'description',
+      discount_code_enabled: 'discount_code_enabled',
       end_time: 'end_time',
       event_times: 'event_times',
       guest_list_enabled: 'guest_list_enabled',
@@ -52,39 +58,219 @@ export default class Event extends AbstractCrudObject {
 
   static get Type (): Object {
     return Object.freeze({
-      private: 'private',
-      public: 'public',
+      community: 'community',
       group: 'group',
-      community: 'community'
+      private: 'private',
+      public: 'public'
+    });
+  }
+  static get Projection (): Object {
+    return Object.freeze({
+      cubemap: 'CUBEMAP',
+      equirectangular: 'EQUIRECTANGULAR',
+      half_equirectangular: 'HALF_EQUIRECTANGULAR'
+    });
+  }
+  static get SpatialAudioFormat (): Object {
+    return Object.freeze({
+      ambix_4: 'ambiX_4'
+    });
+  }
+  static get Status (): Object {
+    return Object.freeze({
+      live_now: 'LIVE_NOW',
+      scheduled_canceled: 'SCHEDULED_CANCELED',
+      scheduled_live: 'SCHEDULED_LIVE',
+      scheduled_unpublished: 'SCHEDULED_UNPUBLISHED',
+      unpublished: 'UNPUBLISHED'
+    });
+  }
+  static get StereoscopicMode (): Object {
+    return Object.freeze({
+      left_right: 'LEFT_RIGHT',
+      mono: 'MONO',
+      top_bottom: 'TOP_BOTTOM'
+    });
+  }
+  static get StreamType (): Object {
+    return Object.freeze({
+      ambient: 'AMBIENT',
+      regular: 'REGULAR'
     });
   }
   static get EventStateFilter (): Object {
     return Object.freeze({
       canceled: 'canceled',
       draft: 'draft',
-      scheduled_draft_for_publication: 'scheduled_draft_for_publication',
-      published: 'published'
+      published: 'published',
+      scheduled_draft_for_publication: 'scheduled_draft_for_publication'
     });
   }
   static get TimeFilter (): Object {
     return Object.freeze({
-      upcoming: 'upcoming',
-      past: 'past'
+      past: 'past',
+      upcoming: 'upcoming'
     });
   }
   static get PromotableEventTypes (): Object {
     return Object.freeze({
       offsite_ticket: 'OFFSITE_TICKET',
-      onsite_ticket: 'ONSITE_TICKET'
+      onsite_ticket: 'ONSITE_TICKET',
+      rsvp: 'RSVP'
     });
   }
 
-  createLiveVideo (fields, params): AbstractObject {
+  getAdmins (fields, params, fetchFirstPage = true): Profile {
+    return this.getEdge(
+      Profile,
+      fields,
+      params,
+      fetchFirstPage,
+      '/admins'
+    );
+  }
+
+  getAttending (fields, params, fetchFirstPage = true): User {
+    return this.getEdge(
+      User,
+      fields,
+      params,
+      fetchFirstPage,
+      '/attending'
+    );
+  }
+
+  createAttending (fields, params): Event {
     return this.createEdge(
-      '/live_videos',
+      '/attending',
+      fields,
+      params,
+      Event
+    );
+  }
+
+  getComments (fields, params, fetchFirstPage = true): NullNode {
+    return this.getEdge(
+      NullNode,
+      fields,
+      params,
+      fetchFirstPage,
+      '/comments'
+    );
+  }
+
+  createComment (fields, params): Comment {
+    return this.createEdge(
+      '/comments',
+      fields,
+      params,
+      Comment
+    );
+  }
+
+  getDeclined (fields, params, fetchFirstPage = true): User {
+    return this.getEdge(
+      User,
+      fields,
+      params,
+      fetchFirstPage,
+      '/declined'
+    );
+  }
+
+  createDeclined (fields, params): Event {
+    return this.createEdge(
+      '/declined',
+      fields,
+      params,
+      Event
+    );
+  }
+
+  getFeed (fields, params, fetchFirstPage = true): NullNode {
+    return this.getEdge(
+      NullNode,
+      fields,
+      params,
+      fetchFirstPage,
+      '/feed'
+    );
+  }
+
+  createFeed (fields, params): AbstractObject {
+    return this.createEdge(
+      '/feed',
       fields,
       params
 
+    );
+  }
+
+  getInterested (fields, params, fetchFirstPage = true): User {
+    return this.getEdge(
+      User,
+      fields,
+      params,
+      fetchFirstPage,
+      '/interested'
+    );
+  }
+
+  getLiveVideos (fields, params, fetchFirstPage = true): NullNode {
+    return this.getEdge(
+      NullNode,
+      fields,
+      params,
+      fetchFirstPage,
+      '/live_videos'
+    );
+  }
+
+  createLiveVideo (fields, params): Event {
+    return this.createEdge(
+      '/live_videos',
+      fields,
+      params,
+      Event
+    );
+  }
+
+  getMaybe (fields, params, fetchFirstPage = true): User {
+    return this.getEdge(
+      User,
+      fields,
+      params,
+      fetchFirstPage,
+      '/maybe'
+    );
+  }
+
+  createMaybe (fields, params): Event {
+    return this.createEdge(
+      '/maybe',
+      fields,
+      params,
+      Event
+    );
+  }
+
+  getNoreply (fields, params, fetchFirstPage = true): User {
+    return this.getEdge(
+      User,
+      fields,
+      params,
+      fetchFirstPage,
+      '/noreply'
+    );
+  }
+
+  getPhotos (fields, params, fetchFirstPage = true): NullNode {
+    return this.getEdge(
+      NullNode,
+      fields,
+      params,
+      fetchFirstPage,
+      '/photos'
     );
   }
 
@@ -97,12 +283,52 @@ export default class Event extends AbstractCrudObject {
     );
   }
 
-  createVideo (fields, params): AbstractObject {
+  getPicture (fields, params, fetchFirstPage = true): NullNode {
+    return this.getEdge(
+      NullNode,
+      fields,
+      params,
+      fetchFirstPage,
+      '/picture'
+    );
+  }
+
+  getPosts (fields, params, fetchFirstPage = true): NullNode {
+    return this.getEdge(
+      NullNode,
+      fields,
+      params,
+      fetchFirstPage,
+      '/posts'
+    );
+  }
+
+  getRoles (fields, params, fetchFirstPage = true): Profile {
+    return this.getEdge(
+      Profile,
+      fields,
+      params,
+      fetchFirstPage,
+      '/roles'
+    );
+  }
+
+  getVideos (fields, params, fetchFirstPage = true): NullNode {
+    return this.getEdge(
+      NullNode,
+      fields,
+      params,
+      fetchFirstPage,
+      '/videos'
+    );
+  }
+
+  createVideo (fields, params): AdVideo {
     return this.createEdge(
       '/videos',
       fields,
-      params
-
+      params,
+      AdVideo
     );
   }
 
