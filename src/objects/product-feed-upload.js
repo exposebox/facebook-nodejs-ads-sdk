@@ -19,6 +19,7 @@ export default class ProductFeedUpload extends AbstractCrudObject {
     return Object.freeze({
       end_time: 'end_time',
       error_count: 'error_count',
+      error_report: 'error_report',
       filename: 'filename',
       id: 'id',
       input_method: 'input_method',
@@ -35,10 +36,19 @@ export default class ProductFeedUpload extends AbstractCrudObject {
   static get InputMethod (): Object {
     return Object.freeze({
       manual_upload: 'Manual Upload',
-      server_fetch: 'Server Fetch',
       reupload_last_file: 'Reupload Last File',
+      server_fetch: 'Server Fetch',
       user_initiated_server_fetch: 'User initiated server fetch'
     });
+  }
+
+  createErrorReport (fields, params): ProductFeedUpload {
+    return this.createEdge(
+      '/error_report',
+      fields,
+      params,
+      ProductFeedUpload
+    );
   }
 
   getErrors (fields, params, fetchFirstPage = true): ProductFeedUploadError {

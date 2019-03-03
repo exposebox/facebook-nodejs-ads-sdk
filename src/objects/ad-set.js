@@ -9,8 +9,8 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
 import AdActivity from './ad-activity';
+import AdStudy from './ad-study';
 import AdCreative from './ad-creative';
-import AdLabel from './ad-label';
 import AdRule from './ad-rule';
 import Ad from './ad';
 import AdAsyncRequest from './ad-async-request';
@@ -28,10 +28,15 @@ export default class AdSet extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
       account_id: 'account_id',
+      ad_keywords: 'ad_keywords',
       adlabels: 'adlabels',
       adset_schedule: 'adset_schedule',
+      asset_feed_id: 'asset_feed_id',
       attribution_spec: 'attribution_spec',
+      best_creative: 'best_creative',
+      bid_adjustments: 'bid_adjustments',
       bid_amount: 'bid_amount',
+      bid_constraints: 'bid_constraints',
       bid_info: 'bid_info',
       bid_strategy: 'bid_strategy',
       billing_event: 'billing_event',
@@ -42,22 +47,29 @@ export default class AdSet extends AbstractCrudObject {
       created_time: 'created_time',
       creative_sequence: 'creative_sequence',
       daily_budget: 'daily_budget',
+      daily_min_spend_target: 'daily_min_spend_target',
+      daily_spend_cap: 'daily_spend_cap',
       destination_type: 'destination_type',
       effective_status: 'effective_status',
       end_time: 'end_time',
       frequency_control_specs: 'frequency_control_specs',
+      full_funnel_exploration_mode: 'full_funnel_exploration_mode',
       id: 'id',
       instagram_actor_id: 'instagram_actor_id',
+      is_dynamic_creative: 'is_dynamic_creative',
+      issues_info: 'issues_info',
       lifetime_budget: 'lifetime_budget',
       lifetime_imps: 'lifetime_imps',
+      lifetime_min_spend_target: 'lifetime_min_spend_target',
+      lifetime_spend_cap: 'lifetime_spend_cap',
       name: 'name',
       optimization_goal: 'optimization_goal',
       pacing_type: 'pacing_type',
       promoted_object: 'promoted_object',
       recommendations: 'recommendations',
       recurring_budget_semantics: 'recurring_budget_semantics',
+      review_feedback: 'review_feedback',
       rf_prediction_id: 'rf_prediction_id',
-      rtb_flag: 'rtb_flag',
       source_adset: 'source_adset',
       source_adset_id: 'source_adset_id',
       start_time: 'start_time',
@@ -87,107 +99,126 @@ export default class AdSet extends AbstractCrudObject {
       offer_claims: 'OFFER_CLAIMS',
       page_likes: 'PAGE_LIKES',
       post_engagement: 'POST_ENGAGEMENT',
+      thruplay: 'THRUPLAY',
       video_views: 'VIDEO_VIEWS'
     });
   }
   static get ConfiguredStatus (): Object {
     return Object.freeze({
       active: 'ACTIVE',
-      paused: 'PAUSED',
+      archived: 'ARCHIVED',
       deleted: 'DELETED',
-      archived: 'ARCHIVED'
+      paused: 'PAUSED'
     });
   }
   static get EffectiveStatus (): Object {
     return Object.freeze({
       active: 'ACTIVE',
-      paused: 'PAUSED',
-      deleted: 'DELETED',
-      pending_review: 'PENDING_REVIEW',
-      disapproved: 'DISAPPROVED',
-      preapproved: 'PREAPPROVED',
-      pending_billing_info: 'PENDING_BILLING_INFO',
-      campaign_paused: 'CAMPAIGN_PAUSED',
+      adset_paused: 'ADSET_PAUSED',
       archived: 'ARCHIVED',
-      adset_paused: 'ADSET_PAUSED'
+      campaign_paused: 'CAMPAIGN_PAUSED',
+      deleted: 'DELETED',
+      disapproved: 'DISAPPROVED',
+      paused: 'PAUSED',
+      pending_billing_info: 'PENDING_BILLING_INFO',
+      pending_review: 'PENDING_REVIEW',
+      preapproved: 'PREAPPROVED',
+      with_issues: 'WITH_ISSUES'
     });
   }
   static get OptimizationGoal (): Object {
     return Object.freeze({
-      none: 'NONE',
+      ad_recall_lift: 'AD_RECALL_LIFT',
+      app_downloads: 'APP_DOWNLOADS',
       app_installs: 'APP_INSTALLS',
       brand_awareness: 'BRAND_AWARENESS',
-      ad_recall_lift: 'AD_RECALL_LIFT',
       clicks: 'CLICKS',
+      derived_events: 'DERIVED_EVENTS',
       engaged_users: 'ENGAGED_USERS',
       event_responses: 'EVENT_RESPONSES',
       impressions: 'IMPRESSIONS',
+      landing_page_views: 'LANDING_PAGE_VIEWS',
       lead_generation: 'LEAD_GENERATION',
       link_clicks: 'LINK_CLICKS',
+      none: 'NONE',
       offer_claims: 'OFFER_CLAIMS',
       offsite_conversions: 'OFFSITE_CONVERSIONS',
       page_engagement: 'PAGE_ENGAGEMENT',
       page_likes: 'PAGE_LIKES',
       post_engagement: 'POST_ENGAGEMENT',
       reach: 'REACH',
+      replies: 'REPLIES',
       social_impressions: 'SOCIAL_IMPRESSIONS',
-      video_views: 'VIDEO_VIEWS',
-      app_downloads: 'APP_DOWNLOADS',
-      landing_page_views: 'LANDING_PAGE_VIEWS',
+      thruplay: 'THRUPLAY',
+      two_second_continuous_video_views: 'TWO_SECOND_CONTINUOUS_VIDEO_VIEWS',
       value: 'VALUE',
-      replies: 'REPLIES'
+      video_views: 'VIDEO_VIEWS'
     });
   }
   static get Status (): Object {
     return Object.freeze({
       active: 'ACTIVE',
-      paused: 'PAUSED',
+      archived: 'ARCHIVED',
       deleted: 'DELETED',
-      archived: 'ARCHIVED'
+      paused: 'PAUSED'
     });
   }
   static get DatePreset (): Object {
     return Object.freeze({
-      today: 'today',
-      yesterday: 'yesterday',
-      this_month: 'this_month',
-      last_month: 'last_month',
-      this_quarter: 'this_quarter',
-      lifetime: 'lifetime',
-      last_3d: 'last_3d',
-      last_7d: 'last_7d',
       last_14d: 'last_14d',
       last_28d: 'last_28d',
       last_30d: 'last_30d',
+      last_3d: 'last_3d',
+      last_7d: 'last_7d',
       last_90d: 'last_90d',
+      last_month: 'last_month',
+      last_quarter: 'last_quarter',
       last_week_mon_sun: 'last_week_mon_sun',
       last_week_sun_sat: 'last_week_sun_sat',
-      last_quarter: 'last_quarter',
       last_year: 'last_year',
+      lifetime: 'lifetime',
+      this_month: 'this_month',
+      this_quarter: 'this_quarter',
       this_week_mon_today: 'this_week_mon_today',
       this_week_sun_today: 'this_week_sun_today',
-      this_year: 'this_year'
+      this_year: 'this_year',
+      today: 'today',
+      yesterday: 'yesterday'
     });
   }
   static get DestinationType (): Object {
     return Object.freeze({
-      undefined: 'UNDEFINED',
-      website: 'WEBSITE',
       app: 'APP',
+      applinks_automatic: 'APPLINKS_AUTOMATIC',
       messenger: 'MESSENGER',
-      applinks_automatic: 'APPLINKS_AUTOMATIC'
+      undefined: 'UNDEFINED',
+      website: 'WEBSITE'
     });
   }
   static get ExecutionOptions (): Object {
     return Object.freeze({
-      validate_only: 'validate_only',
-      include_recommendations: 'include_recommendations'
+      include_recommendations: 'include_recommendations',
+      validate_only: 'validate_only'
+    });
+  }
+  static get FullFunnelExplorationMode (): Object {
+    return Object.freeze({
+      extended_exploration: 'EXTENDED_EXPLORATION',
+      limited_exploration: 'LIMITED_EXPLORATION',
+      none_exploration: 'NONE_EXPLORATION'
     });
   }
   static get Operator (): Object {
     return Object.freeze({
       all: 'ALL',
       any: 'ANY'
+    });
+  }
+  static get StatusOption (): Object {
+    return Object.freeze({
+      active: 'ACTIVE',
+      inherited_from_source: 'INHERITED_FROM_SOURCE',
+      paused: 'PAUSED'
     });
   }
 
@@ -198,6 +229,16 @@ export default class AdSet extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/activities'
+    );
+  }
+
+  getAdStudies (fields, params, fetchFirstPage = true): AdStudy {
+    return this.getEdge(
+      AdStudy,
+      fields,
+      params,
+      fetchFirstPage,
+      '/ad_studies'
     );
   }
 
@@ -218,12 +259,12 @@ export default class AdSet extends AbstractCrudObject {
     );
   }
 
-  createAdLabel (fields, params): AdLabel {
+  createAdLabel (fields, params): AdSet {
     return this.createEdge(
       '/adlabels',
       fields,
       params,
-      AdLabel
+      AdSet
     );
   }
 
@@ -264,6 +305,15 @@ export default class AdSet extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/copies'
+    );
+  }
+
+  createCopy (fields, params): AdSet {
+    return this.createEdge(
+      '/copies',
+      fields,
+      params,
+      AdSet
     );
   }
 

@@ -35,6 +35,15 @@ export default class ShadowIGUser extends AbstractCrudObject {
     });
   }
 
+  createMention (fields, params): AbstractObject {
+    return this.createEdge(
+      '/Mentions',
+      fields,
+      params
+
+    );
+  }
+
   getInsights (fields, params, fetchFirstPage = true): InstagramInsightsResult {
     return this.getEdge(
       InstagramInsightsResult,
@@ -42,15 +51,6 @@ export default class ShadowIGUser extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/insights'
-    );
-  }
-
-  createMedia (fields, params): AbstractObject {
-    return this.createEdge(
-      '/media',
-      fields,
-      params
-
     );
   }
 
@@ -64,12 +64,41 @@ export default class ShadowIGUser extends AbstractCrudObject {
     );
   }
 
+  createMedia (fields, params): ShadowIGMedia {
+    return this.createEdge(
+      '/media',
+      fields,
+      params,
+      ShadowIGMedia
+    );
+  }
+
   createMediaPublish (fields, params): ShadowIGMedia {
     return this.createEdge(
       '/media_publish',
       fields,
       params,
       ShadowIGMedia
+    );
+  }
+
+  getRecentlySearchedHashtags (fields, params, fetchFirstPage = true): AbstractObject {
+    return this.getEdge(
+      AbstractObject,
+      fields,
+      params,
+      fetchFirstPage,
+      '/recently_searched_hashtags'
+    );
+  }
+
+  getStories (fields, params, fetchFirstPage = true): ShadowIGMedia {
+    return this.getEdge(
+      ShadowIGMedia,
+      fields,
+      params,
+      fetchFirstPage,
+      '/stories'
     );
   }
 

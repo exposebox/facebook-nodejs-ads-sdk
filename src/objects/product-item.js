@@ -8,6 +8,7 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Comment from './comment';
 import ProductSet from './product-set';
 
 /**
@@ -18,12 +19,14 @@ import ProductSet from './product-set';
 export default class ProductItem extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
+      additional_image_cdn_urls: 'additional_image_cdn_urls',
       additional_image_urls: 'additional_image_urls',
       additional_variant_attributes: 'additional_variant_attributes',
       age_group: 'age_group',
       applinks: 'applinks',
       availability: 'availability',
       brand: 'brand',
+      capability_to_review_status: 'capability_to_review_status',
       category: 'category',
       color: 'color',
       commerce_insights: 'commerce_insights',
@@ -40,10 +43,12 @@ export default class ProductItem extends AbstractCrudObject {
       gender: 'gender',
       gtin: 'gtin',
       id: 'id',
+      image_cdn_urls: 'image_cdn_urls',
       image_url: 'image_url',
       inventory: 'inventory',
       manufacturer_part_number: 'manufacturer_part_number',
       material: 'material',
+      mobile_link: 'mobile_link',
       name: 'name',
       ordering_index: 'ordering_index',
       pattern: 'pattern',
@@ -72,28 +77,31 @@ export default class ProductItem extends AbstractCrudObject {
   static get AgeGroup (): Object {
     return Object.freeze({
       adult: 'adult',
+      all_ages: 'all ages',
       infant: 'infant',
       kids: 'kids',
       newborn: 'newborn',
+      teen: 'teen',
       toddler: 'toddler'
     });
   }
   static get Availability (): Object {
     return Object.freeze({
-      in_stock: 'in stock',
-      out_of_stock: 'out of stock',
-      preorder: 'preorder',
       available_for_order: 'available for order',
       discontinued: 'discontinued',
-      pending: 'pending'
+      in_stock: 'in stock',
+      out_of_stock: 'out of stock',
+      pending: 'pending',
+      preorder: 'preorder'
     });
   }
   static get Condition (): Object {
     return Object.freeze({
+      cpo: 'cpo',
       new: 'new',
+      open_box_new: 'open_box_new',
       refurbished: 'refurbished',
-      used: 'used',
-      cpo: 'cpo'
+      used: 'used'
     });
   }
   static get Gender (): Object {
@@ -105,25 +113,34 @@ export default class ProductItem extends AbstractCrudObject {
   }
   static get ReviewStatus (): Object {
     return Object.freeze({
-      pending: 'pending',
-      rejected: 'rejected',
       approved: 'approved',
-      outdated: 'outdated'
+      outdated: 'outdated',
+      pending: 'pending',
+      rejected: 'rejected'
     });
   }
   static get ShippingWeightUnit (): Object {
     return Object.freeze({
       g: 'g',
       kg: 'kg',
-      oz: 'oz',
-      lb: 'lb'
+      lb: 'lb',
+      oz: 'oz'
     });
   }
   static get Visibility (): Object {
     return Object.freeze({
-      staging: 'staging',
-      published: 'published'
+      published: 'published',
+      staging: 'staging'
     });
+  }
+
+  createComment (fields, params): Comment {
+    return this.createEdge(
+      '/comments',
+      fields,
+      params,
+      Comment
+    );
   }
 
   getProductSets (fields, params, fetchFirstPage = true): ProductSet {

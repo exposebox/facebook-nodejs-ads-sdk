@@ -17,7 +17,8 @@ export default class AdNetworkAnalyticsSyncQueryResult extends AbstractCrudObjec
   static get Fields () {
     return Object.freeze({
       query_id: 'query_id',
-      results: 'results'
+      results: 'results',
+      id: 'id'
     });
   }
 }

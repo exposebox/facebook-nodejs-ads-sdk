@@ -8,6 +8,11 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import AdAccount from './ad-account';
+import AdMonetizationProperty from './ad-monetization-property';
+import Page from './page';
+import ProductCatalog from './product-catalog';
+import BusinessSettingLogsData from './business-setting-logs-data';
 
 /**
  * BusinessUser
@@ -19,8 +24,10 @@ export default class BusinessUser extends AbstractCrudObject {
     return Object.freeze({
       business: 'business',
       email: 'email',
+      finance_permission: 'finance_permission',
       first_name: 'first_name',
       id: 'id',
+      ip_permission: 'ip_permission',
       last_name: 'last_name',
       marked_for_removal: 'marked_for_removal',
       name: 'name',
@@ -33,13 +40,62 @@ export default class BusinessUser extends AbstractCrudObject {
 
   static get Role (): Object {
     return Object.freeze({
-      finance_editor: 'FINANCE_EDITOR',
-      finance_analyst: 'FINANCE_ANALYST',
-      ads_rights_reviewer: 'ADS_RIGHTS_REVIEWER',
       admin: 'ADMIN',
+      ads_rights_reviewer: 'ADS_RIGHTS_REVIEWER',
       employee: 'EMPLOYEE',
-      fb_employee_sales_rep: 'FB_EMPLOYEE_SALES_REP'
+      finance_analyst: 'FINANCE_ANALYST',
+      finance_editor: 'FINANCE_EDITOR'
     });
+  }
+
+  getAssignedAdAccounts (fields, params, fetchFirstPage = true): AdAccount {
+    return this.getEdge(
+      AdAccount,
+      fields,
+      params,
+      fetchFirstPage,
+      '/assigned_ad_accounts'
+    );
+  }
+
+  getAssignedMonetizationProperties (fields, params, fetchFirstPage = true): AdMonetizationProperty {
+    return this.getEdge(
+      AdMonetizationProperty,
+      fields,
+      params,
+      fetchFirstPage,
+      '/assigned_monetization_properties'
+    );
+  }
+
+  getAssignedPages (fields, params, fetchFirstPage = true): Page {
+    return this.getEdge(
+      Page,
+      fields,
+      params,
+      fetchFirstPage,
+      '/assigned_pages'
+    );
+  }
+
+  getAssignedProductCatalogs (fields, params, fetchFirstPage = true): ProductCatalog {
+    return this.getEdge(
+      ProductCatalog,
+      fields,
+      params,
+      fetchFirstPage,
+      '/assigned_product_catalogs'
+    );
+  }
+
+  getBusinessSettingLogs (fields, params, fetchFirstPage = true): BusinessSettingLogsData {
+    return this.getEdge(
+      BusinessSettingLogsData,
+      fields,
+      params,
+      fetchFirstPage,
+      '/businesssettinglogs'
+    );
   }
 
   delete (fields, params): AbstractObject {

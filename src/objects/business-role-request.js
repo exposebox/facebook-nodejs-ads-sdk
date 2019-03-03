@@ -21,6 +21,7 @@ export default class BusinessRoleRequest extends AbstractCrudObject {
       created_time: 'created_time',
       email: 'email',
       expiration_time: 'expiration_time',
+      expiry_time: 'expiry_time',
       finance_role: 'finance_role',
       id: 'id',
       invite_link: 'invite_link',
@@ -35,20 +36,19 @@ export default class BusinessRoleRequest extends AbstractCrudObject {
 
   static get Role (): Object {
     return Object.freeze({
-      finance_editor: 'FINANCE_EDITOR',
-      finance_analyst: 'FINANCE_ANALYST',
-      ads_rights_reviewer: 'ADS_RIGHTS_REVIEWER',
       admin: 'ADMIN',
+      ads_rights_reviewer: 'ADS_RIGHTS_REVIEWER',
       employee: 'EMPLOYEE',
-      fb_employee_sales_rep: 'FB_EMPLOYEE_SALES_REP'
+      finance_analyst: 'FINANCE_ANALYST',
+      finance_editor: 'FINANCE_EDITOR'
     });
   }
   static get Status (): Object {
     return Object.freeze({
-      pending: 'PENDING',
       accepted: 'ACCEPTED',
       declined: 'DECLINED',
-      expired: 'EXPIRED'
+      expired: 'EXPIRED',
+      pending: 'PENDING'
     });
   }
 

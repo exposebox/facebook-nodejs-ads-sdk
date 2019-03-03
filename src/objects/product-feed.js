@@ -8,8 +8,15 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import AutomotiveModel from './automotive-model';
+import Destination from './destination';
+import Flight from './flight';
+import HomeListing from './home-listing';
+import Hotel from './hotel';
 import ProductItem from './product-item';
+import ProductFeedRule from './product-feed-rule';
 import ProductFeedUpload from './product-feed-upload';
+import Vehicle from './vehicle';
 
 /**
  * ProductFeed
@@ -29,6 +36,7 @@ export default class ProductFeed extends AbstractCrudObject {
       id: 'id',
       latest_upload: 'latest_upload',
       name: 'name',
+      override_type: 'override_type',
       product_count: 'product_count',
       qualified_product_count: 'qualified_product_count',
       quoted_fields_mode: 'quoted_fields_mode',
@@ -42,48 +50,94 @@ export default class ProductFeed extends AbstractCrudObject {
       autodetect: 'AUTODETECT',
       bar: 'BAR',
       comma: 'COMMA',
+      semicolon: 'SEMICOLON',
       tab: 'TAB',
-      tilde: 'TILDE',
-      semicolon: 'SEMICOLON'
+      tilde: 'TILDE'
     });
   }
   static get QuotedFieldsMode (): Object {
     return Object.freeze({
       autodetect: 'AUTODETECT',
-      on: 'ON',
-      off: 'OFF'
+      off: 'OFF',
+      on: 'ON'
     });
   }
   static get Encoding (): Object {
     return Object.freeze({
       autodetect: 'AUTODETECT',
       latin1: 'LATIN1',
-      utf8: 'UTF8',
-      utf16le: 'UTF16LE',
       utf16be: 'UTF16BE',
+      utf16le: 'UTF16LE',
+      utf32be: 'UTF32BE',
       utf32le: 'UTF32LE',
-      utf32be: 'UTF32BE'
+      utf8: 'UTF8'
     });
   }
   static get FeedType (): Object {
     return Object.freeze({
       auto: 'AUTO',
-      auto_offer: 'AUTO_OFFER',
       destination: 'DESTINATION',
       flight: 'FLIGHT',
       home_listing: 'HOME_LISTING',
-      home_service_provider: 'HOME_SERVICE_PROVIDER',
-      home_service_review: 'HOME_SERVICE_REVIEW',
       hotel: 'HOTEL',
       hotel_room: 'HOTEL_ROOM',
       local_inventory: 'LOCAL_INVENTORY',
       market: 'MARKET',
       media_title: 'MEDIA_TITLE',
       products: 'PRODUCTS',
-      test_dynamic_item: 'TEST_DYNAMIC_ITEM',
-      vehicle_offer: 'VEHICLE_OFFER',
-      vehicles: 'VEHICLES'
+      vehicles: 'VEHICLES',
+      vehicle_offer: 'VEHICLE_OFFER'
     });
+  }
+
+  getAutomotiveModels (fields, params, fetchFirstPage = true): AutomotiveModel {
+    return this.getEdge(
+      AutomotiveModel,
+      fields,
+      params,
+      fetchFirstPage,
+      '/automotive_models'
+    );
+  }
+
+  getDestinations (fields, params, fetchFirstPage = true): Destination {
+    return this.getEdge(
+      Destination,
+      fields,
+      params,
+      fetchFirstPage,
+      '/destinations'
+    );
+  }
+
+  getFlights (fields, params, fetchFirstPage = true): Flight {
+    return this.getEdge(
+      Flight,
+      fields,
+      params,
+      fetchFirstPage,
+      '/flights'
+    );
+  }
+
+  getHomeListings (fields, params, fetchFirstPage = true): HomeListing {
+    return this.getEdge(
+      HomeListing,
+      fields,
+      params,
+      fetchFirstPage,
+      '/home_listings'
+    );
+  }
+
+  getHotels (fields, params, fetchFirstPage = true): Hotel {
+    return this.getEdge(
+      Hotel,
+      fields,
+      params,
+      fetchFirstPage,
+      '/hotels'
+    );
   }
 
   getProducts (fields, params, fetchFirstPage = true): ProductItem {
@@ -96,12 +150,22 @@ export default class ProductFeed extends AbstractCrudObject {
     );
   }
 
-  createRule (fields, params): AbstractObject {
+  getRules (fields, params, fetchFirstPage = true): ProductFeedRule {
+    return this.getEdge(
+      ProductFeedRule,
+      fields,
+      params,
+      fetchFirstPage,
+      '/rules'
+    );
+  }
+
+  createRule (fields, params): ProductFeedRule {
     return this.createEdge(
       '/rules',
       fields,
-      params
-
+      params,
+      ProductFeedRule
     );
   }
 
@@ -124,9 +188,9 @@ export default class ProductFeed extends AbstractCrudObject {
     );
   }
 
-  getVehicles (fields, params, fetchFirstPage = true): AbstractObject {
+  getVehicles (fields, params, fetchFirstPage = true): Vehicle {
     return this.getEdge(
-      AbstractObject,
+      Vehicle,
       fields,
       params,
       fetchFirstPage,

@@ -33,11 +33,24 @@ export default class Profile extends AbstractCrudObject {
 
   static get ProfileType (): Object {
     return Object.freeze({
-      user: 'user',
-      page: 'page',
+      application: 'application',
       event: 'event',
       group: 'group',
-      application: 'application'
+      page: 'page',
+      user: 'user'
+    });
+  }
+  static get Type (): Object {
+    return Object.freeze({
+      angry: 'ANGRY',
+      haha: 'HAHA',
+      like: 'LIKE',
+      love: 'LOVE',
+      none: 'NONE',
+      pride: 'PRIDE',
+      sad: 'SAD',
+      thankful: 'THANKFUL',
+      wow: 'WOW'
     });
   }
 

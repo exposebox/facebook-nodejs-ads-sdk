@@ -18,8 +18,10 @@ export default class MediaFingerprint extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
       duration_in_sec: 'duration_in_sec',
+      expiration_time: 'expiration_time',
       fingerprint_content_type: 'fingerprint_content_type',
       fingerprint_type: 'fingerprint_type',
+      fingerprint_validity: 'fingerprint_validity',
       id: 'id',
       metadata: 'metadata',
       title: 'title',
@@ -29,11 +31,18 @@ export default class MediaFingerprint extends AbstractCrudObject {
 
   static get FingerprintContentType (): Object {
     return Object.freeze({
-      songtrack: 'SONGTRACK',
+      am_songtrack: 'AM_SONGTRACK',
       episode: 'EPISODE',
-      other: 'OTHER',
       movie: 'MOVIE',
-      am_songtrack: 'AM_SONGTRACK'
+      other: 'OTHER',
+      songtrack: 'SONGTRACK'
+    });
+  }
+  static get FingerprintValidity (): Object {
+    return Object.freeze({
+      expired: 'EXPIRED',
+      expiring: 'EXPIRING',
+      valid: 'VALID'
     });
   }
 

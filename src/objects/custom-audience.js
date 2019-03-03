@@ -12,7 +12,7 @@ import AdAccount from './ad-account';
 import Ad from './ad';
 import CustomAudiencePrefillState from './custom-audience-prefill-state';
 import CustomAudienceSession from './custom-audience-session';
-import User from './user';
+import CustomAudiencesharedAccountInfo from './custom-audienceshared-account-info';
 
 /**
  * CustomAudience
@@ -24,12 +24,22 @@ export default class CustomAudience extends AbstractCrudObject {
     return Object.freeze({
       account_id: 'account_id',
       approximate_count: 'approximate_count',
+      customer_file_source: 'customer_file_source',
       data_source: 'data_source',
+      data_source_types: 'data_source_types',
+      datafile_custom_audience_uploading_status: 'datafile_custom_audience_uploading_status',
       delivery_status: 'delivery_status',
       description: 'description',
+      excluded_custom_audiences: 'excluded_custom_audiences',
+      expiry_time: 'expiry_time',
       external_event_source: 'external_event_source',
+      household_audience: 'household_audience',
       id: 'id',
+      included_custom_audiences: 'included_custom_audiences',
+      is_household: 'is_household',
+      is_snapshot: 'is_snapshot',
       is_value_based: 'is_value_based',
+      list_of_accounts: 'list_of_accounts',
       lookalike_audience_ids: 'lookalike_audience_ids',
       lookalike_spec: 'lookalike_spec',
       name: 'name',
@@ -38,8 +48,13 @@ export default class CustomAudience extends AbstractCrudObject {
       permission_for_actions: 'permission_for_actions',
       pixel_id: 'pixel_id',
       retention_days: 'retention_days',
+      rev_share_policy_id: 'rev_share_policy_id',
       rule: 'rule',
       rule_aggregation: 'rule_aggregation',
+      rule_v2: 'rule_v2',
+      seed_audience: 'seed_audience',
+      sharing_status: 'sharing_status',
+      study_spec: 'study_spec',
       subtype: 'subtype',
       time_content_updated: 'time_content_updated',
       time_created: 'time_created',
@@ -49,40 +64,51 @@ export default class CustomAudience extends AbstractCrudObject {
 
   static get ClaimObjective (): Object {
     return Object.freeze({
-      auto_offer: 'AUTO_OFFER',
+      automotive_model: 'AUTOMOTIVE_MODEL',
+      collaborative_ads: 'COLLABORATIVE_ADS',
       home_listing: 'HOME_LISTING',
+      media_title: 'MEDIA_TITLE',
       product: 'PRODUCT',
       travel: 'TRAVEL',
-      vehicle: 'VEHICLE'
-    });
-  }
-  static get ContentType (): Object {
-    return Object.freeze({
-      auto_offer: 'AUTO_OFFER',
-      destination: 'DESTINATION',
-      flight: 'FLIGHT',
-      home_listing: 'HOME_LISTING',
-      hotel: 'HOTEL',
       vehicle: 'VEHICLE',
       vehicle_offer: 'VEHICLE_OFFER'
     });
   }
+  static get ContentType (): Object {
+    return Object.freeze({
+      automotive_model: 'AUTOMOTIVE_MODEL',
+      destination: 'DESTINATION',
+      flight: 'FLIGHT',
+      home_listing: 'HOME_LISTING',
+      hotel: 'HOTEL',
+      media_title: 'MEDIA_TITLE',
+      product: 'PRODUCT',
+      vehicle: 'VEHICLE',
+      vehicle_offer: 'VEHICLE_OFFER'
+    });
+  }
+  static get CustomerFileSource (): Object {
+    return Object.freeze({
+      both_user_and_partner_provided: 'BOTH_USER_AND_PARTNER_PROVIDED',
+      partner_provided_only: 'PARTNER_PROVIDED_ONLY',
+      user_provided_only: 'USER_PROVIDED_ONLY'
+    });
+  }
   static get Subtype (): Object {
     return Object.freeze({
-      custom: 'CUSTOM',
-      website: 'WEBSITE',
       app: 'APP',
-      offline_conversion: 'OFFLINE_CONVERSION',
-      claim: 'CLAIM',
-      partner: 'PARTNER',
-      managed: 'MANAGED',
-      video: 'VIDEO',
-      lookalike: 'LOOKALIKE',
-      engagement: 'ENGAGEMENT',
-      data_set: 'DATA_SET',
       bag_of_accounts: 'BAG_OF_ACCOUNTS',
+      claim: 'CLAIM',
+      custom: 'CUSTOM',
+      engagement: 'ENGAGEMENT',
+      fox: 'FOX',
+      lookalike: 'LOOKALIKE',
+      managed: 'MANAGED',
+      offline_conversion: 'OFFLINE_CONVERSION',
+      partner: 'PARTNER',
       study_rule_audience: 'STUDY_RULE_AUDIENCE',
-      fox: 'FOX'
+      video: 'VIDEO',
+      website: 'WEBSITE'
     });
   }
 
@@ -103,12 +129,12 @@ export default class CustomAudience extends AbstractCrudObject {
     );
   }
 
-  createAdAccount (fields, params): AdAccount {
+  createAdAccount (fields, params): CustomAudience {
     return this.createEdge(
       '/adaccounts',
       fields,
       params,
-      AdAccount
+      CustomAudience
     );
   }
 
@@ -119,6 +145,31 @@ export default class CustomAudience extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/ads'
+    );
+  }
+
+  deleteCapabilities (params): AbstractObject {
+    return super.deleteEdge(
+      '/capabilities',
+      params
+    );
+  }
+
+  createCapability (fields, params): AbstractObject {
+    return this.createEdge(
+      '/capabilities',
+      fields,
+      params
+
+    );
+  }
+
+  createDatum (fields, params): AbstractObject {
+    return this.createEdge(
+      '/data',
+      fields,
+      params
+
     );
   }
 
@@ -142,6 +193,32 @@ export default class CustomAudience extends AbstractCrudObject {
     );
   }
 
+  getSharedAccountInfo (fields, params, fetchFirstPage = true): CustomAudiencesharedAccountInfo {
+    return this.getEdge(
+      CustomAudiencesharedAccountInfo,
+      fields,
+      params,
+      fetchFirstPage,
+      '/shared_account_info'
+    );
+  }
+
+  deleteUpload (params): AbstractObject {
+    return super.deleteEdge(
+      '/upload',
+      params
+    );
+  }
+
+  createUpload (fields, params): CustomAudience {
+    return this.createEdge(
+      '/upload',
+      fields,
+      params,
+      CustomAudience
+    );
+  }
+
   deleteUsers (params): AbstractObject {
     return super.deleteEdge(
       '/users',
@@ -149,12 +226,12 @@ export default class CustomAudience extends AbstractCrudObject {
     );
   }
 
-  createUser (fields, params): User {
+  createUser (fields, params): CustomAudience {
     return this.createEdge(
       '/users',
       fields,
       params,
-      User
+      CustomAudience
     );
   }
 

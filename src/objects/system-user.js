@@ -7,6 +7,11 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
+import AdAccount from './ad-account';
+import AdMonetizationProperty from './ad-monetization-property';
+import Page from './page';
+import ProductCatalog from './product-catalog';
+import User from './user';
 
 /**
  * SystemUser
@@ -18,31 +23,76 @@ export default class SystemUser extends AbstractCrudObject {
     return Object.freeze({
       created_by: 'created_by',
       created_time: 'created_time',
+      finance_permission: 'finance_permission',
       id: 'id',
+      ip_permission: 'ip_permission',
       name: 'name'
     });
   }
 
   static get Role (): Object {
     return Object.freeze({
-      finance_editor: 'FINANCE_EDITOR',
-      finance_analyst: 'FINANCE_ANALYST',
-      ads_rights_reviewer: 'ADS_RIGHTS_REVIEWER',
       admin: 'ADMIN',
+      ads_rights_reviewer: 'ADS_RIGHTS_REVIEWER',
       employee: 'EMPLOYEE',
-      fb_employee_sales_rep: 'FB_EMPLOYEE_SALES_REP'
+      finance_analyst: 'FINANCE_ANALYST',
+      finance_editor: 'FINANCE_EDITOR'
     });
+  }
+
+  getAssignedAdAccounts (fields, params, fetchFirstPage = true): AdAccount {
+    return this.getEdge(
+      AdAccount,
+      fields,
+      params,
+      fetchFirstPage,
+      '/assigned_ad_accounts'
+    );
+  }
+
+  getAssignedMonetizationProperties (fields, params, fetchFirstPage = true): AdMonetizationProperty {
+    return this.getEdge(
+      AdMonetizationProperty,
+      fields,
+      params,
+      fetchFirstPage,
+      '/assigned_monetization_properties'
+    );
+  }
+
+  getAssignedPages (fields, params, fetchFirstPage = true): Page {
+    return this.getEdge(
+      Page,
+      fields,
+      params,
+      fetchFirstPage,
+      '/assigned_pages'
+    );
+  }
+
+  getAssignedProductCatalogs (fields, params, fetchFirstPage = true): ProductCatalog {
+    return this.getEdge(
+      ProductCatalog,
+      fields,
+      params,
+      fetchFirstPage,
+      '/assigned_product_catalogs'
+    );
+  }
+
+  getUpdatedBy (fields, params, fetchFirstPage = true): User {
+    return this.getEdge(
+      User,
+      fields,
+      params,
+      fetchFirstPage,
+      '/updated_by'
+    );
   }
 
   get (fields, params): SystemUser {
     return this.read(
       fields,
-      params
-    );
-  }
-
-  update (fields, params): SystemUser {
-    return super.update(
       params
     );
   }
