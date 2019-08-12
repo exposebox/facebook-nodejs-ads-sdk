@@ -19,7 +19,7 @@ export default class DeliveryCheckExtraInfo extends AbstractCrudObject {
       adgroup_ids: 'adgroup_ids',
       campaign_ids: 'campaign_ids',
       countries: 'countries',
-      id: 'id'
     });
   }
+
 }

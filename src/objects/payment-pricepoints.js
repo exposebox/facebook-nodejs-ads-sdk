@@ -17,7 +17,7 @@ export default class PaymentPricepoints extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
       mobile: 'mobile',
-      id: 'id'
     });
   }
+
 }

@@ -20,7 +20,7 @@ export default class TrackingAndConversionWithDefaults extends AbstractCrudObjec
       custom_tracking: 'custom_tracking',
       default_conversion: 'default_conversion',
       default_tracking: 'default_tracking',
-      id: 'id'
     });
   }
+
 }

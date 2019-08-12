@@ -26,7 +26,7 @@ export default class LiveVideoAdBreakConfig extends AbstractCrudObject {
       preparing_duration: 'preparing_duration',
       time_between_ad_breaks_secs: 'time_between_ad_breaks_secs',
       viewer_count_threshold: 'viewer_count_threshold',
-      id: 'id'
     });
   }
+
 }

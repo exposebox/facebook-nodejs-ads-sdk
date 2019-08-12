@@ -19,7 +19,7 @@ export default class IosAppLink extends AbstractCrudObject {
       app_name: 'app_name',
       app_store_id: 'app_store_id',
       url: 'url',
-      id: 'id'
     });
   }
+
 }

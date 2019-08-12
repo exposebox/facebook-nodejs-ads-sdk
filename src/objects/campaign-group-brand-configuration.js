@@ -19,7 +19,7 @@ export default class CampaignGroupBrandConfiguration extends AbstractCrudObject 
       brand_product_name: 'brand_product_name',
       locale: 'locale',
       vertical: 'vertical',
-      id: 'id'
     });
   }
+
 }

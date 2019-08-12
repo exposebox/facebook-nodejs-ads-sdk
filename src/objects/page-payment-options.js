@@ -21,7 +21,7 @@ export default class PagePaymentOptions extends AbstractCrudObject {
       discover: 'discover',
       mastercard: 'mastercard',
       visa: 'visa',
-      id: 'id'
     });
   }
+
 }

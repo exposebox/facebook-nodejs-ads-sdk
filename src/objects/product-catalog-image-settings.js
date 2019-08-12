@@ -18,7 +18,7 @@ export default class ProductCatalogImageSettings extends AbstractCrudObject {
     return Object.freeze({
       carousel_ad: 'carousel_ad',
       single_ad: 'single_ad',
-      id: 'id'
     });
   }
+
 }

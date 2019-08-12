@@ -67,7 +67,7 @@ export default class AdgroupActivity extends AbstractCrudObject {
       update_time_new: 'update_time_new',
       update_time_old: 'update_time_old',
       view_tags_new: 'view_tags_new',
-      view_tags_old: 'view_tags_old'
+      view_tags_old: 'view_tags_old',
     });
   }
 
@@ -90,7 +90,7 @@ export default class AdgroupActivity extends AbstractCrudObject {
       post_engagement: 'POST_ENGAGEMENT',
       product_catalog_sales: 'PRODUCT_CATALOG_SALES',
       video_views: 'VIDEO_VIEWS',
-      website_conversions: 'WEBSITE_CONVERSIONS'
+      website_conversions: 'WEBSITE_CONVERSIONS',
     });
   }
   static get ObjectiveOld (): Object {
@@ -112,11 +112,13 @@ export default class AdgroupActivity extends AbstractCrudObject {
       post_engagement: 'POST_ENGAGEMENT',
       product_catalog_sales: 'PRODUCT_CATALOG_SALES',
       video_views: 'VIDEO_VIEWS',
-      website_conversions: 'WEBSITE_CONVERSIONS'
+      website_conversions: 'WEBSITE_CONVERSIONS',
     });
   }
 
-  get (fields, params): AdgroupActivity {
+  
+  get (fields: Array<string>, params: Object = {}): AdgroupActivity {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

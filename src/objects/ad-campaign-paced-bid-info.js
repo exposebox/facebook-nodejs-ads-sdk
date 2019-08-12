@@ -17,7 +17,7 @@ export default class AdCampaignPacedBidInfo extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
       bidding_status: 'bidding_status',
-      id: 'id'
     });
   }
+
 }

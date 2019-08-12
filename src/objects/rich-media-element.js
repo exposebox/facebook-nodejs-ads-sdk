@@ -19,7 +19,7 @@ export default class RichMediaElement extends AbstractCrudObject {
       element: 'element',
       element_type: 'element_type',
       name: 'name',
-      id: 'id'
     });
   }
+
 }

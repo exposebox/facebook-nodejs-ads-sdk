@@ -19,7 +19,7 @@ export default class PageParking extends AbstractCrudObject {
       lot: 'lot',
       street: 'street',
       valet: 'valet',
-      id: 'id'
     });
   }
+
 }

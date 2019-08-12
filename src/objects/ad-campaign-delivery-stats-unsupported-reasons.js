@@ -18,7 +18,7 @@ export default class AdCampaignDeliveryStatsUnsupportedReasons extends AbstractC
     return Object.freeze({
       reason_data: 'reason_data',
       reason_type: 'reason_type',
-      id: 'id'
     });
   }
+
 }

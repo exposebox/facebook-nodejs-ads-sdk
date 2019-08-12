@@ -23,7 +23,6 @@ export default class AdRecommendation extends AbstractCrudObject {
       message: 'message',
       recommendation_data: 'recommendation_data',
       title: 'title',
-      id: 'id'
     });
   }
 
@@ -31,14 +30,14 @@ export default class AdRecommendation extends AbstractCrudObject {
     return Object.freeze({
       high: 'HIGH',
       low: 'LOW',
-      medium: 'MEDIUM'
+      medium: 'MEDIUM',
     });
   }
   static get Importance (): Object {
     return Object.freeze({
       high: 'HIGH',
       low: 'LOW',
-      medium: 'MEDIUM'
+      medium: 'MEDIUM',
     });
   }
 }

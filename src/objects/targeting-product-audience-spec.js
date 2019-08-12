@@ -19,7 +19,7 @@ export default class TargetingProductAudienceSpec extends AbstractCrudObject {
       exclusions: 'exclusions',
       inclusions: 'inclusions',
       product_set_id: 'product_set_id',
-      id: 'id'
     });
   }
+
 }

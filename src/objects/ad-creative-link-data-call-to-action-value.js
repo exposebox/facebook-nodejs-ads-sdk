@@ -27,7 +27,7 @@ export default class AdCreativeLinkDataCallToActionValue extends AbstractCrudObj
       page: 'page',
       product_link: 'product_link',
       whatsapp_number: 'whatsapp_number',
-      id: 'id'
     });
   }
+
 }

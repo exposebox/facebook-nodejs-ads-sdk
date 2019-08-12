@@ -19,7 +19,7 @@ export default class ScreenName extends AbstractCrudObject {
       service_name: 'service_name',
       service_type: 'service_type',
       value: 'value',
-      id: 'id'
     });
   }
+
 }

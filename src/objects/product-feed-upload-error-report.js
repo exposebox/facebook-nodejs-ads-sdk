@@ -18,7 +18,7 @@ export default class ProductFeedUploadErrorReport extends AbstractCrudObject {
     return Object.freeze({
       file_handle: 'file_handle',
       report_status: 'report_status',
-      id: 'id'
     });
   }
+
 }

@@ -29,7 +29,7 @@ export default class Location extends AbstractCrudObject {
       state: 'state',
       street: 'street',
       zip: 'zip',
-      id: 'id'
     });
   }
+
 }

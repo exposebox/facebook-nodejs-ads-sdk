@@ -19,7 +19,7 @@ export default class ProductFeedRuleSuggestion extends AbstractCrudObject {
       attribute: 'attribute',
       params: 'params',
       type: 'type',
-      id: 'id'
     });
   }
+
 }

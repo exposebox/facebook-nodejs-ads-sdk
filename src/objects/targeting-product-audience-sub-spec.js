@@ -18,7 +18,7 @@ export default class TargetingProductAudienceSubSpec extends AbstractCrudObject 
     return Object.freeze({
       retention_seconds: 'retention_seconds',
       rule: 'rule',
-      id: 'id'
     });
   }
+
 }

@@ -8,6 +8,7 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import Profile from './profile';
 
 /**
@@ -25,6 +26,7 @@ export default class Comment extends AbstractCrudObject {
       can_hide: 'can_hide',
       can_like: 'can_like',
       can_remove: 'can_remove',
+      can_reply_privately: 'can_reply_privately',
       comment_count: 'comment_count',
       created_time: 'created_time',
       from: 'from',
@@ -38,7 +40,8 @@ export default class Comment extends AbstractCrudObject {
       object: 'object',
       parent: 'parent',
       permalink_url: 'permalink_url',
-      user_likes: 'user_likes'
+      private_reply_conversation: 'private_reply_conversation',
+      user_likes: 'user_likes',
     });
   }
 
@@ -50,29 +53,29 @@ export default class Comment extends AbstractCrudObject {
       graphql_multiple_value_hack_do_not_use: 'GRAPHQL_MULTIPLE_VALUE_HACK_DO_NOT_USE',
       owner_or_commenter: 'OWNER_OR_COMMENTER',
       side_conversation: 'SIDE_CONVERSATION',
-      side_conversation_and_post_owner: 'SIDE_CONVERSATION_AND_POST_OWNER'
+      side_conversation_and_post_owner: 'SIDE_CONVERSATION_AND_POST_OWNER',
     });
   }
   static get Filter (): Object {
     return Object.freeze({
       stream: 'stream',
-      toplevel: 'toplevel'
+      toplevel: 'toplevel',
     });
   }
   static get LiveFilter (): Object {
     return Object.freeze({
       filter_low_quality: 'filter_low_quality',
-      no_filter: 'no_filter'
+      no_filter: 'no_filter',
     });
   }
   static get Order (): Object {
     return Object.freeze({
       chronological: 'chronological',
-      reverse_chronological: 'reverse_chronological'
+      reverse_chronological: 'reverse_chronological',
     });
   }
 
-  getComments (fields, params, fetchFirstPage = true): Comment {
+  getComments (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Comment,
       fields,
@@ -82,14 +85,23 @@ export default class Comment extends AbstractCrudObject {
     );
   }
 
-  deleteLikes (params): AbstractObject {
+  createComment (fields: Array<string>, params: Object = {}): Promise<Comment> {
+    return this.createEdge(
+      '/comments',
+      fields,
+      params,
+      Comment
+    );
+  }
+
+  deleteLikes (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/likes',
       params
     );
   }
 
-  getLikes (fields, params, fetchFirstPage = true): Profile {
+  getLikes (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Profile,
       fields,
@@ -99,7 +111,7 @@ export default class Comment extends AbstractCrudObject {
     );
   }
 
-  createLike (fields, params): Comment {
+  createLike (fields: Array<string>, params: Object = {}): Promise<Comment> {
     return this.createEdge(
       '/likes',
       fields,
@@ -108,7 +120,16 @@ export default class Comment extends AbstractCrudObject {
     );
   }
 
-  getReactions (fields, params, fetchFirstPage = true): Profile {
+  createPrivateReply (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
+    return this.createEdge(
+      '/private_replies',
+      fields,
+      params,
+      
+    );
+  }
+
+  getReactions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Profile,
       fields,
@@ -118,20 +139,26 @@ export default class Comment extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): Comment {
+  
+  get (fields: Array<string>, params: Object = {}): Comment {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): Comment {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): Comment {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

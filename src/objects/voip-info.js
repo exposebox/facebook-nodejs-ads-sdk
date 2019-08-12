@@ -23,7 +23,7 @@ export default class VoipInfo extends AbstractCrudObject {
       is_pushable: 'is_pushable',
       reason_code: 'reason_code',
       reason_description: 'reason_description',
-      id: 'id'
     });
   }
+
 }

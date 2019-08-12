@@ -8,6 +8,7 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 
 /**
  * UnifiedThread
@@ -31,11 +32,12 @@ export default class UnifiedThread extends AbstractCrudObject {
       subject: 'subject',
       unread_count: 'unread_count',
       updated_time: 'updated_time',
-      wallpaper: 'wallpaper'
+      wallpaper: 'wallpaper',
     });
   }
 
-  getMessages (fields, params, fetchFirstPage = true): AbstractObject {
+
+  getMessages (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AbstractObject,
       fields,
@@ -45,16 +47,18 @@ export default class UnifiedThread extends AbstractCrudObject {
     );
   }
 
-  createMessage (fields, params): AbstractObject {
+  createMessage (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
     return this.createEdge(
       '/messages',
       fields,
-      params
-
+      params,
+      
     );
   }
 
-  get (fields, params): UnifiedThread {
+  
+  get (fields: Array<string>, params: Object = {}): UnifiedThread {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

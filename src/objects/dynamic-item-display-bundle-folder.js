@@ -8,7 +8,6 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
-import DynamicItemDisplayBundle from './dynamic-item-display-bundle';
 
 /**
  * DynamicItemDisplayBundleFolder
@@ -23,28 +22,19 @@ export default class DynamicItemDisplayBundleFolder extends AbstractCrudObject {
       name: 'name',
       product_catalog: 'product_catalog',
       product_set: 'product_set',
-      valid_labels: 'valid_labels'
+      valid_labels: 'valid_labels',
     });
   }
 
-  deleteBundles (params): AbstractObject {
+
+  deleteBundles (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/bundles',
       params
     );
   }
 
-  getBundles (fields, params, fetchFirstPage = true): DynamicItemDisplayBundle {
-    return this.getEdge(
-      DynamicItemDisplayBundle,
-      fields,
-      params,
-      fetchFirstPage,
-      '/bundles'
-    );
-  }
-
-  createBundle (fields, params): DynamicItemDisplayBundleFolder {
+  createBundle (fields: Array<string>, params: Object = {}): Promise<DynamicItemDisplayBundleFolder> {
     return this.createEdge(
       '/bundles',
       fields,
@@ -53,20 +43,26 @@ export default class DynamicItemDisplayBundleFolder extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): DynamicItemDisplayBundleFolder {
+  
+  get (fields: Array<string>, params: Object = {}): DynamicItemDisplayBundleFolder {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): DynamicItemDisplayBundleFolder {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): DynamicItemDisplayBundleFolder {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

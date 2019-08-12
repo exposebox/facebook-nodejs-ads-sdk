@@ -18,7 +18,6 @@ export default class AdAccountDefaultObjective extends AbstractCrudObject {
     return Object.freeze({
       default_objective_for_user: 'default_objective_for_user',
       objective_for_level: 'objective_for_level',
-      id: 'id'
     });
   }
 
@@ -41,7 +40,7 @@ export default class AdAccountDefaultObjective extends AbstractCrudObject {
       post_engagement: 'POST_ENGAGEMENT',
       product_catalog_sales: 'PRODUCT_CATALOG_SALES',
       video_views: 'VIDEO_VIEWS',
-      website_conversions: 'WEBSITE_CONVERSIONS'
+      website_conversions: 'WEBSITE_CONVERSIONS',
     });
   }
   static get ObjectiveForLevel (): Object {
@@ -63,7 +62,7 @@ export default class AdAccountDefaultObjective extends AbstractCrudObject {
       post_engagement: 'POST_ENGAGEMENT',
       product_catalog_sales: 'PRODUCT_CATALOG_SALES',
       video_views: 'VIDEO_VIEWS',
-      website_conversions: 'WEBSITE_CONVERSIONS'
+      website_conversions: 'WEBSITE_CONVERSIONS',
     });
   }
 }

@@ -20,7 +20,7 @@ export default class AdCreativeLinkDataAppLinkSpec extends AbstractCrudObject {
       ios: 'ios',
       ipad: 'ipad',
       iphone: 'iphone',
-      id: 'id'
     });
   }
+
 }

@@ -22,7 +22,7 @@ export default class AdCreativeStaticFallbackSpec extends AbstractCrudObject {
       link: 'link',
       message: 'message',
       name: 'name',
-      id: 'id'
     });
   }
+
 }

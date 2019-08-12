@@ -20,7 +20,7 @@ export default class ProductFeedMissingFeedItemReplacement extends AbstractCrudO
       product_item: 'product_item',
       store_product_item: 'store_product_item',
       vehicle: 'vehicle',
-      id: 'id'
     });
   }
+
 }

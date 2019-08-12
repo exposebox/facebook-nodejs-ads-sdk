@@ -35,7 +35,7 @@ export default class PageCallToAction extends AbstractCrudObject {
       type: 'type',
       updated_time: 'updated_time',
       web_destination_type: 'web_destination_type',
-      web_url: 'web_url'
+      web_url: 'web_url',
     });
   }
 
@@ -48,7 +48,7 @@ export default class PageCallToAction extends AbstractCrudObject {
       none: 'NONE',
       phone_call: 'PHONE_CALL',
       shop_on_facebook: 'SHOP_ON_FACEBOOK',
-      website: 'WEBSITE'
+      website: 'WEBSITE',
     });
   }
   static get IphoneDestinationType (): Object {
@@ -60,7 +60,7 @@ export default class PageCallToAction extends AbstractCrudObject {
       none: 'NONE',
       phone_call: 'PHONE_CALL',
       shop_on_facebook: 'SHOP_ON_FACEBOOK',
-      website: 'WEBSITE'
+      website: 'WEBSITE',
     });
   }
   static get Type (): Object {
@@ -91,7 +91,7 @@ export default class PageCallToAction extends AbstractCrudObject {
       sign_up: 'SIGN_UP',
       visit_group: 'VISIT_GROUP',
       watch_now: 'WATCH_NOW',
-      woodhenge_support: 'WOODHENGE_SUPPORT'
+      woodhenge_support: 'WOODHENGE_SUPPORT',
     });
   }
   static get WebDestinationType (): Object {
@@ -101,24 +101,30 @@ export default class PageCallToAction extends AbstractCrudObject {
       messenger: 'MESSENGER',
       none: 'NONE',
       shop_on_facebook: 'SHOP_ON_FACEBOOK',
-      website: 'WEBSITE'
+      website: 'WEBSITE',
     });
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): PageCallToAction {
+  
+  get (fields: Array<string>, params: Object = {}): PageCallToAction {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): PageCallToAction {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): PageCallToAction {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

@@ -24,7 +24,6 @@ export default class Targeting extends AbstractCrudObject {
       audience_network_positions: 'audience_network_positions',
       behaviors: 'behaviors',
       brand_safety_content_filter_levels: 'brand_safety_content_filter_levels',
-      brand_safety_content_severity_levels: 'brand_safety_content_severity_levels',
       catalog_based_targeting: 'catalog_based_targeting',
       cities: 'cities',
       college_years: 'college_years',
@@ -49,6 +48,7 @@ export default class Targeting extends AbstractCrudObject {
       engagement_specs: 'engagement_specs',
       ethnic_affinity: 'ethnic_affinity',
       exclude_reached_since: 'exclude_reached_since',
+      excluded_brand_safety_content_types: 'excluded_brand_safety_content_types',
       excluded_connections: 'excluded_connections',
       excluded_custom_audiences: 'excluded_custom_audiences',
       excluded_dynamic_audience_ids: 'excluded_dynamic_audience_ids',
@@ -75,7 +75,6 @@ export default class Targeting extends AbstractCrudObject {
       income: 'income',
       industries: 'industries',
       instagram_positions: 'instagram_positions',
-      instream_video_sponsorship_placements: 'instream_video_sponsorship_placements',
       interested_in: 'interested_in',
       interests: 'interests',
       is_whatsapp_destination_ad: 'is_whatsapp_destination_ad',
@@ -106,7 +105,6 @@ export default class Targeting extends AbstractCrudObject {
       work_employers: 'work_employers',
       work_positions: 'work_positions',
       zips: 'zips',
-      id: 'id'
     });
   }
 
@@ -114,14 +112,14 @@ export default class Targeting extends AbstractCrudObject {
     return Object.freeze({
       connected_tv: 'connected_tv',
       desktop: 'desktop',
-      mobile: 'mobile'
+      mobile: 'mobile',
     });
   }
   static get EffectiveDevicePlatforms (): Object {
     return Object.freeze({
       connected_tv: 'connected_tv',
       desktop: 'desktop',
-      mobile: 'mobile'
+      mobile: 'mobile',
     });
   }
 }

@@ -20,7 +20,6 @@ export default class AdAccountDeliveryEstimate extends AbstractCrudObject {
       estimate_dau: 'estimate_dau',
       estimate_mau: 'estimate_mau',
       estimate_ready: 'estimate_ready',
-      id: 'id'
     });
   }
 
@@ -50,7 +49,7 @@ export default class AdAccountDeliveryEstimate extends AbstractCrudObject {
       thruplay: 'THRUPLAY',
       two_second_continuous_video_views: 'TWO_SECOND_CONTINUOUS_VIDEO_VIEWS',
       value: 'VALUE',
-      video_views: 'VIDEO_VIEWS'
+      video_views: 'VIDEO_VIEWS',
     });
   }
 }

@@ -23,7 +23,7 @@ export default class AdCreativeObjectStorySpec extends AbstractCrudObject {
       template_data: 'template_data',
       text_data: 'text_data',
       video_data: 'video_data',
-      id: 'id'
     });
   }
+
 }

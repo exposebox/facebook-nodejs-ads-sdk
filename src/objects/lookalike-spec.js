@@ -28,7 +28,7 @@ export default class LookalikeSpec extends AbstractCrudObject {
       target_countries: 'target_countries',
       target_country_names: 'target_country_names',
       type: 'type',
-      id: 'id'
     });
   }
+
 }

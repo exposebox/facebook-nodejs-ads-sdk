@@ -8,6 +8,7 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 
 /**
  * PublisherBlockList
@@ -26,11 +27,12 @@ export default class PublisherBlockList extends AbstractCrudObject {
       last_update_user: 'last_update_user',
       name: 'name',
       owner_ad_account_id: 'owner_ad_account_id',
-      web_publishers: 'web_publishers'
+      web_publishers: 'web_publishers',
     });
   }
 
-  getPageDAppPublishers (fields, params, fetchFirstPage = true): AbstractObject {
+
+  getPagedAppPublishers (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AbstractObject,
       fields,
@@ -40,7 +42,7 @@ export default class PublisherBlockList extends AbstractCrudObject {
     );
   }
 
-  getPageDWebPublishers (fields, params, fetchFirstPage = true): AbstractObject {
+  getPagedWebPublishers (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AbstractObject,
       fields,
@@ -50,20 +52,26 @@ export default class PublisherBlockList extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): PublisherBlockList {
+  
+  get (fields: Array<string>, params: Object = {}): PublisherBlockList {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): PublisherBlockList {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): PublisherBlockList {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

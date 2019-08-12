@@ -8,12 +8,12 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import User from './user';
 import Comment from './comment';
 import Page from './page';
 import LiveVideoError from './live-video-error';
-import VideoGameShow from './video-game-show';
-import LiveWithGuestSession from './live-with-guest-session';
+import LiveVideoInputStream from './live-video-input-stream';
 import Profile from './profile';
 import VideoPoll from './video-poll';
 
@@ -50,10 +50,44 @@ export default class LiveVideo extends AbstractCrudObject {
       targeting: 'targeting',
       title: 'title',
       total_views: 'total_views',
-      video: 'video'
+      video: 'video',
     });
   }
 
+  static get Projection (): Object {
+    return Object.freeze({
+      cubemap: 'CUBEMAP',
+      equirectangular: 'EQUIRECTANGULAR',
+      half_equirectangular: 'HALF_EQUIRECTANGULAR',
+    });
+  }
+  static get SpatialAudioFormat (): Object {
+    return Object.freeze({
+      ambix_4: 'ambiX_4',
+    });
+  }
+  static get Status (): Object {
+    return Object.freeze({
+      live_now: 'LIVE_NOW',
+      scheduled_canceled: 'SCHEDULED_CANCELED',
+      scheduled_live: 'SCHEDULED_LIVE',
+      scheduled_unpublished: 'SCHEDULED_UNPUBLISHED',
+      unpublished: 'UNPUBLISHED',
+    });
+  }
+  static get StereoscopicMode (): Object {
+    return Object.freeze({
+      left_right: 'LEFT_RIGHT',
+      mono: 'MONO',
+      top_bottom: 'TOP_BOTTOM',
+    });
+  }
+  static get StreamType (): Object {
+    return Object.freeze({
+      ambient: 'AMBIENT',
+      regular: 'REGULAR',
+    });
+  }
   static get BroadcastStatus (): Object {
     return Object.freeze({
       live: 'LIVE',
@@ -64,47 +98,13 @@ export default class LiveVideo extends AbstractCrudObject {
       scheduled_live: 'SCHEDULED_LIVE',
       scheduled_unpublished: 'SCHEDULED_UNPUBLISHED',
       unpublished: 'UNPUBLISHED',
-      vod: 'VOD'
-    });
-  }
-  static get Projection (): Object {
-    return Object.freeze({
-      cubemap: 'CUBEMAP',
-      equirectangular: 'EQUIRECTANGULAR',
-      half_equirectangular: 'HALF_EQUIRECTANGULAR'
+      vod: 'VOD',
     });
   }
   static get Source (): Object {
     return Object.freeze({
       owner: 'owner',
-      target: 'target'
-    });
-  }
-  static get SpatialAudioFormat (): Object {
-    return Object.freeze({
-      ambix_4: 'ambiX_4'
-    });
-  }
-  static get Status (): Object {
-    return Object.freeze({
-      live_now: 'LIVE_NOW',
-      scheduled_canceled: 'SCHEDULED_CANCELED',
-      scheduled_live: 'SCHEDULED_LIVE',
-      scheduled_unpublished: 'SCHEDULED_UNPUBLISHED',
-      unpublished: 'UNPUBLISHED'
-    });
-  }
-  static get StereoscopicMode (): Object {
-    return Object.freeze({
-      left_right: 'LEFT_RIGHT',
-      mono: 'MONO',
-      top_bottom: 'TOP_BOTTOM'
-    });
-  }
-  static get StreamType (): Object {
-    return Object.freeze({
-      ambient: 'AMBIENT',
-      regular: 'REGULAR'
+      target: 'target',
     });
   }
   static get LiveCommentModerationSetting (): Object {
@@ -114,11 +114,11 @@ export default class LiveVideo extends AbstractCrudObject {
       protected_mode: 'PROTECTED_MODE',
       restricted: 'RESTRICTED',
       slow: 'SLOW',
-      supporter: 'SUPPORTER'
+      supporter: 'SUPPORTER',
     });
   }
 
-  getBlockedUsers (fields, params, fetchFirstPage = true): User {
+  getBlockedUsers (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       User,
       fields,
@@ -128,7 +128,7 @@ export default class LiveVideo extends AbstractCrudObject {
     );
   }
 
-  getComments (fields, params, fetchFirstPage = true): Comment {
+  getComments (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Comment,
       fields,
@@ -138,7 +138,7 @@ export default class LiveVideo extends AbstractCrudObject {
     );
   }
 
-  getCrosspostSharedPages (fields, params, fetchFirstPage = true): Page {
+  getCrosspostSharedPages (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Page,
       fields,
@@ -148,7 +148,7 @@ export default class LiveVideo extends AbstractCrudObject {
     );
   }
 
-  getCrosspostedBroadcasts (fields, params, fetchFirstPage = true): LiveVideo {
+  getCrosspostedBroadcasts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       LiveVideo,
       fields,
@@ -158,7 +158,7 @@ export default class LiveVideo extends AbstractCrudObject {
     );
   }
 
-  getErrors (fields, params, fetchFirstPage = true): LiveVideoError {
+  getErrors (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       LiveVideoError,
       fields,
@@ -168,45 +168,16 @@ export default class LiveVideo extends AbstractCrudObject {
     );
   }
 
-  getGameShows (fields, params, fetchFirstPage = true): VideoGameShow {
-    return this.getEdge(
-      VideoGameShow,
-      fields,
-      params,
-      fetchFirstPage,
-      '/game_shows'
-    );
-  }
-
-  getGuestSessions (fields, params, fetchFirstPage = true): LiveWithGuestSession {
-    return this.getEdge(
-      LiveWithGuestSession,
-      fields,
-      params,
-      fetchFirstPage,
-      '/guest_sessions'
-    );
-  }
-
-  createGuestSession (fields, params): LiveWithGuestSession {
-    return this.createEdge(
-      '/guest_sessions',
-      fields,
-      params,
-      LiveWithGuestSession
-    );
-  }
-
-  createInputStream (fields, params): LiveVideo {
+  createInputStream (fields: Array<string>, params: Object = {}): Promise<LiveVideoInputStream> {
     return this.createEdge(
       '/input_streams',
       fields,
       params,
-      LiveVideo
+      LiveVideoInputStream
     );
   }
 
-  getLikes (fields, params, fetchFirstPage = true): Profile {
+  getLikes (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Profile,
       fields,
@@ -216,7 +187,7 @@ export default class LiveVideo extends AbstractCrudObject {
     );
   }
 
-  getPolls (fields, params, fetchFirstPage = true): VideoPoll {
+  getPolls (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       VideoPoll,
       fields,
@@ -226,7 +197,7 @@ export default class LiveVideo extends AbstractCrudObject {
     );
   }
 
-  createPoll (fields, params): VideoPoll {
+  createPoll (fields: Array<string>, params: Object = {}): Promise<VideoPoll> {
     return this.createEdge(
       '/polls',
       fields,
@@ -235,7 +206,7 @@ export default class LiveVideo extends AbstractCrudObject {
     );
   }
 
-  getReactions (fields, params, fetchFirstPage = true): Profile {
+  getReactions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Profile,
       fields,
@@ -245,20 +216,26 @@ export default class LiveVideo extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): LiveVideo {
+  
+  get (fields: Array<string>, params: Object = {}): LiveVideo {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): LiveVideo {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): LiveVideo {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

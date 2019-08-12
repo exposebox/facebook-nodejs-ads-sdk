@@ -18,7 +18,6 @@ export default class AdCreativeLinkDataCallToAction extends AbstractCrudObject {
     return Object.freeze({
       type: 'type',
       value: 'value',
-      id: 'id'
     });
   }
 
@@ -32,11 +31,14 @@ export default class AdCreativeLinkDataCallToAction extends AbstractCrudObject {
       buy_tickets: 'BUY_TICKETS',
       call: 'CALL',
       call_me: 'CALL_ME',
+      contact: 'CONTACT',
       contact_us: 'CONTACT_US',
       donate: 'DONATE',
       donate_now: 'DONATE_NOW',
       download: 'DOWNLOAD',
       event_rsvp: 'EVENT_RSVP',
+      find_a_group: 'FIND_A_GROUP',
+      find_your_groups: 'FIND_YOUR_GROUPS',
       follow_news_storyline: 'FOLLOW_NEWS_STORYLINE',
       get_directions: 'GET_DIRECTIONS',
       get_offer: 'GET_OFFER',
@@ -63,6 +65,7 @@ export default class AdCreativeLinkDataCallToAction extends AbstractCrudObject {
       share: 'SHARE',
       shop_now: 'SHOP_NOW',
       sign_up: 'SIGN_UP',
+      sotto_subscribe: 'SOTTO_SUBSCRIBE',
       subscribe: 'SUBSCRIBE',
       update_app: 'UPDATE_APP',
       use_app: 'USE_APP',
@@ -72,7 +75,7 @@ export default class AdCreativeLinkDataCallToAction extends AbstractCrudObject {
       watch_more: 'WATCH_MORE',
       watch_video: 'WATCH_VIDEO',
       whatsapp_message: 'WHATSAPP_MESSAGE',
-      woodhenge_support: 'WOODHENGE_SUPPORT'
+      woodhenge_support: 'WOODHENGE_SUPPORT',
     });
   }
 }

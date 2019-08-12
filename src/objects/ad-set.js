@@ -8,6 +8,7 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import AdActivity from './ad-activity';
 import AdStudy from './ad-study';
 import AdCreative from './ad-creative';
@@ -28,12 +29,10 @@ export default class AdSet extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
       account_id: 'account_id',
-      ad_keywords: 'ad_keywords',
       adlabels: 'adlabels',
       adset_schedule: 'adset_schedule',
       asset_feed_id: 'asset_feed_id',
       attribution_spec: 'attribution_spec',
-      best_creative: 'best_creative',
       bid_adjustments: 'bid_adjustments',
       bid_amount: 'bid_amount',
       bid_constraints: 'bid_constraints',
@@ -64,6 +63,7 @@ export default class AdSet extends AbstractCrudObject {
       lifetime_spend_cap: 'lifetime_spend_cap',
       name: 'name',
       optimization_goal: 'optimization_goal',
+      optimization_sub_event: 'optimization_sub_event',
       pacing_type: 'pacing_type',
       promoted_object: 'promoted_object',
       recommendations: 'recommendations',
@@ -78,7 +78,7 @@ export default class AdSet extends AbstractCrudObject {
       time_based_ad_rotation_id_blocks: 'time_based_ad_rotation_id_blocks',
       time_based_ad_rotation_intervals: 'time_based_ad_rotation_intervals',
       updated_time: 'updated_time',
-      use_new_app_click: 'use_new_app_click'
+      use_new_app_click: 'use_new_app_click',
     });
   }
 
@@ -86,7 +86,7 @@ export default class AdSet extends AbstractCrudObject {
     return Object.freeze({
       lowest_cost_without_cap: 'LOWEST_COST_WITHOUT_CAP',
       lowest_cost_with_bid_cap: 'LOWEST_COST_WITH_BID_CAP',
-      target_cost: 'TARGET_COST'
+      target_cost: 'TARGET_COST',
     });
   }
   static get BillingEvent (): Object {
@@ -100,7 +100,7 @@ export default class AdSet extends AbstractCrudObject {
       page_likes: 'PAGE_LIKES',
       post_engagement: 'POST_ENGAGEMENT',
       thruplay: 'THRUPLAY',
-      video_views: 'VIDEO_VIEWS'
+      video_views: 'VIDEO_VIEWS',
     });
   }
   static get ConfiguredStatus (): Object {
@@ -108,22 +108,17 @@ export default class AdSet extends AbstractCrudObject {
       active: 'ACTIVE',
       archived: 'ARCHIVED',
       deleted: 'DELETED',
-      paused: 'PAUSED'
+      paused: 'PAUSED',
     });
   }
   static get EffectiveStatus (): Object {
     return Object.freeze({
       active: 'ACTIVE',
-      adset_paused: 'ADSET_PAUSED',
       archived: 'ARCHIVED',
-      campaign_paused: 'CAMPAIGN_PAUSED',
       deleted: 'DELETED',
-      disapproved: 'DISAPPROVED',
+      in_process: 'IN_PROCESS',
       paused: 'PAUSED',
-      pending_billing_info: 'PENDING_BILLING_INFO',
-      pending_review: 'PENDING_REVIEW',
-      preapproved: 'PREAPPROVED',
-      with_issues: 'WITH_ISSUES'
+      with_issues: 'WITH_ISSUES',
     });
   }
   static get OptimizationGoal (): Object {
@@ -152,7 +147,7 @@ export default class AdSet extends AbstractCrudObject {
       thruplay: 'THRUPLAY',
       two_second_continuous_video_views: 'TWO_SECOND_CONTINUOUS_VIDEO_VIEWS',
       value: 'VALUE',
-      video_views: 'VIDEO_VIEWS'
+      video_views: 'VIDEO_VIEWS',
     });
   }
   static get Status (): Object {
@@ -160,69 +155,84 @@ export default class AdSet extends AbstractCrudObject {
       active: 'ACTIVE',
       archived: 'ARCHIVED',
       deleted: 'DELETED',
-      paused: 'PAUSED'
-    });
-  }
-  static get DatePreset (): Object {
-    return Object.freeze({
-      last_14d: 'last_14d',
-      last_28d: 'last_28d',
-      last_30d: 'last_30d',
-      last_3d: 'last_3d',
-      last_7d: 'last_7d',
-      last_90d: 'last_90d',
-      last_month: 'last_month',
-      last_quarter: 'last_quarter',
-      last_week_mon_sun: 'last_week_mon_sun',
-      last_week_sun_sat: 'last_week_sun_sat',
-      last_year: 'last_year',
-      lifetime: 'lifetime',
-      this_month: 'this_month',
-      this_quarter: 'this_quarter',
-      this_week_mon_today: 'this_week_mon_today',
-      this_week_sun_today: 'this_week_sun_today',
-      this_year: 'this_year',
-      today: 'today',
-      yesterday: 'yesterday'
+      paused: 'PAUSED',
     });
   }
   static get DestinationType (): Object {
     return Object.freeze({
       app: 'APP',
       applinks_automatic: 'APPLINKS_AUTOMATIC',
+      facebook: 'FACEBOOK',
       messenger: 'MESSENGER',
       undefined: 'UNDEFINED',
-      website: 'WEBSITE'
+      website: 'WEBSITE',
     });
   }
   static get ExecutionOptions (): Object {
     return Object.freeze({
       include_recommendations: 'include_recommendations',
-      validate_only: 'validate_only'
+      validate_only: 'validate_only',
     });
   }
   static get FullFunnelExplorationMode (): Object {
     return Object.freeze({
       extended_exploration: 'EXTENDED_EXPLORATION',
       limited_exploration: 'LIMITED_EXPLORATION',
-      none_exploration: 'NONE_EXPLORATION'
+      none_exploration: 'NONE_EXPLORATION',
+    });
+  }
+  static get OptimizationSubEvent (): Object {
+    return Object.freeze({
+      none: 'NONE',
+      travel_intent: 'TRAVEL_INTENT',
+      travel_intent_bucket_01: 'TRAVEL_INTENT_BUCKET_01',
+      travel_intent_bucket_02: 'TRAVEL_INTENT_BUCKET_02',
+      travel_intent_bucket_03: 'TRAVEL_INTENT_BUCKET_03',
+      travel_intent_bucket_04: 'TRAVEL_INTENT_BUCKET_04',
+      travel_intent_bucket_05: 'TRAVEL_INTENT_BUCKET_05',
+      travel_intent_no_destination_intent: 'TRAVEL_INTENT_NO_DESTINATION_INTENT',
+      trip_consideration: 'TRIP_CONSIDERATION',
+      video_sound_on: 'VIDEO_SOUND_ON',
+    });
+  }
+  static get DatePreset (): Object {
+    return Object.freeze({
+      last_14d: 'LAST_14D',
+      last_28d: 'LAST_28D',
+      last_30d: 'LAST_30D',
+      last_3d: 'LAST_3D',
+      last_7d: 'LAST_7D',
+      last_90d: 'LAST_90D',
+      last_month: 'LAST_MONTH',
+      last_quarter: 'LAST_QUARTER',
+      last_week_mon_sun: 'LAST_WEEK_MON_SUN',
+      last_week_sun_sat: 'LAST_WEEK_SUN_SAT',
+      last_year: 'LAST_YEAR',
+      lifetime: 'LIFETIME',
+      this_month: 'THIS_MONTH',
+      this_quarter: 'THIS_QUARTER',
+      this_week_mon_today: 'THIS_WEEK_MON_TODAY',
+      this_week_sun_today: 'THIS_WEEK_SUN_TODAY',
+      this_year: 'THIS_YEAR',
+      today: 'TODAY',
+      yesterday: 'YESTERDAY',
     });
   }
   static get Operator (): Object {
     return Object.freeze({
       all: 'ALL',
-      any: 'ANY'
+      any: 'ANY',
     });
   }
   static get StatusOption (): Object {
     return Object.freeze({
       active: 'ACTIVE',
       inherited_from_source: 'INHERITED_FROM_SOURCE',
-      paused: 'PAUSED'
+      paused: 'PAUSED',
     });
   }
 
-  getActivities (fields, params, fetchFirstPage = true): AdActivity {
+  getActivities (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdActivity,
       fields,
@@ -232,7 +242,7 @@ export default class AdSet extends AbstractCrudObject {
     );
   }
 
-  getAdStudies (fields, params, fetchFirstPage = true): AdStudy {
+  getAdStudies (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdStudy,
       fields,
@@ -242,7 +252,7 @@ export default class AdSet extends AbstractCrudObject {
     );
   }
 
-  getAdCreatives (fields, params, fetchFirstPage = true): AdCreative {
+  getAdCreatives (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdCreative,
       fields,
@@ -252,23 +262,7 @@ export default class AdSet extends AbstractCrudObject {
     );
   }
 
-  deleteAdLabels (params): AbstractObject {
-    return super.deleteEdge(
-      '/adlabels',
-      params
-    );
-  }
-
-  createAdLabel (fields, params): AdSet {
-    return this.createEdge(
-      '/adlabels',
-      fields,
-      params,
-      AdSet
-    );
-  }
-
-  getAdRulesGoverned (fields, params, fetchFirstPage = true): AdRule {
+  getAdRulesGoverned (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdRule,
       fields,
@@ -278,7 +272,7 @@ export default class AdSet extends AbstractCrudObject {
     );
   }
 
-  getAds (fields, params, fetchFirstPage = true): Ad {
+  getAds (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Ad,
       fields,
@@ -288,7 +282,7 @@ export default class AdSet extends AbstractCrudObject {
     );
   }
 
-  getAsyncAdRequests (fields, params, fetchFirstPage = true): AdAsyncRequest {
+  getAsyncAdRequests (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdAsyncRequest,
       fields,
@@ -298,7 +292,7 @@ export default class AdSet extends AbstractCrudObject {
     );
   }
 
-  getCopies (fields, params, fetchFirstPage = true): AdSet {
+  getCopies (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdSet,
       fields,
@@ -308,7 +302,7 @@ export default class AdSet extends AbstractCrudObject {
     );
   }
 
-  createCopy (fields, params): AdSet {
+  createCopy (fields: Array<string>, params: Object = {}): Promise<AdSet> {
     return this.createEdge(
       '/copies',
       fields,
@@ -317,7 +311,7 @@ export default class AdSet extends AbstractCrudObject {
     );
   }
 
-  getDeliveryEstimate (fields, params, fetchFirstPage = true): AdCampaignDeliveryEstimate {
+  getDeliveryEstimate (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdCampaignDeliveryEstimate,
       fields,
@@ -327,7 +321,7 @@ export default class AdSet extends AbstractCrudObject {
     );
   }
 
-  getInsights (fields, params, fetchFirstPage = true): AdsInsights {
+  getInsights (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdsInsights,
       fields,
@@ -337,7 +331,7 @@ export default class AdSet extends AbstractCrudObject {
     );
   }
 
-  getInsightsAsync (fields, params): AdReportRun {
+  getInsightsAsync (fields: Array<string>, params: Object = {}): Promise<AdReportRun> {
     return this.createEdge(
       '/insights',
       fields,
@@ -346,7 +340,23 @@ export default class AdSet extends AbstractCrudObject {
     );
   }
 
-  getTargetingSentenceLines (fields, params, fetchFirstPage = true): TargetingSentenceLine {
+  deleteLabels (params: Object = {}): Promise<*> {
+    return super.deleteEdge(
+      '/labels',
+      params
+    );
+  }
+
+  createLabel (fields: Array<string>, params: Object = {}): Promise<AdSet> {
+    return this.createEdge(
+      '/labels',
+      fields,
+      params,
+      AdSet
+    );
+  }
+
+  getTargetingSentenceLines (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       TargetingSentenceLine,
       fields,
@@ -356,20 +366,26 @@ export default class AdSet extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): AdSet {
+  
+  get (fields: Array<string>, params: Object = {}): AdSet {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): AdSet {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): AdSet {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

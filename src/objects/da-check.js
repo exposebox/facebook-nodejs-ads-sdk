@@ -22,7 +22,7 @@ export default class DACheck extends AbstractCrudObject {
       result: 'result',
       title: 'title',
       user_message: 'user_message',
-      id: 'id'
     });
   }
+
 }

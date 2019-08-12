@@ -18,7 +18,7 @@ export default class CPASParentCatalogSettings extends AbstractCrudObject {
     return Object.freeze({
       attribution_windows: 'attribution_windows',
       default_currency: 'default_currency',
-      id: 'id'
+      id: 'id',
     });
   }
 
@@ -30,18 +30,22 @@ export default class CPASParentCatalogSettings extends AbstractCrudObject {
       x28d_click: 'X28D_CLICK',
       x28d_view: 'X28D_VIEW',
       x7d_click: 'X7D_CLICK',
-      x7d_view: 'X7D_VIEW'
+      x7d_view: 'X7D_VIEW',
     });
   }
 
-  get (fields, params): CPASParentCatalogSettings {
+  
+  get (fields: Array<string>, params: Object = {}): CPASParentCatalogSettings {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): CPASParentCatalogSettings {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): CPASParentCatalogSettings {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

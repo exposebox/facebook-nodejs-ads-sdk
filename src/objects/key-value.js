@@ -18,7 +18,7 @@ export default class KeyValue extends AbstractCrudObject {
     return Object.freeze({
       key: 'key',
       value: 'value',
-      id: 'id'
     });
   }
+
 }
