@@ -19,7 +19,7 @@ export default class AdCreativeCollectionThumbnailInfo extends AbstractCrudObjec
       element_child_index: 'element_child_index',
       element_crops: 'element_crops',
       element_id: 'element_id',
-      id: 'id'
     });
   }
+
 }

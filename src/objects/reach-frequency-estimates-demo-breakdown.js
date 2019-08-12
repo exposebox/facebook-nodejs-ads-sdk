@@ -18,7 +18,7 @@ export default class ReachFrequencyEstimatesDemoBreakdown extends AbstractCrudOb
     return Object.freeze({
       female: 'female',
       male: 'male',
-      id: 'id'
     });
   }
+
 }

@@ -24,7 +24,7 @@ export default class LeadGenDraftQuestion extends AbstractCrudObject {
       label: 'label',
       options: 'options',
       type: 'type',
-      id: 'id'
     });
   }
+
 }

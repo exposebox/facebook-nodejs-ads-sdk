@@ -19,7 +19,7 @@ export default class ReachFrequencyDayPart extends AbstractCrudObject {
       days: 'days',
       end_minute: 'end_minute',
       start_minute: 'start_minute',
-      id: 'id'
     });
   }
+
 }

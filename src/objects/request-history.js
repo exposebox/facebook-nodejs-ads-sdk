@@ -23,7 +23,6 @@ export default class RequestHistory extends AbstractCrudObject {
       http_method: 'http_method',
       post_params: 'post_params',
       query_params: 'query_params',
-      id: 'id'
     });
   }
 
@@ -31,7 +30,7 @@ export default class RequestHistory extends AbstractCrudObject {
     return Object.freeze({
       delete: 'DELETE',
       get: 'GET',
-      post: 'POST'
+      post: 'POST',
     });
   }
 }

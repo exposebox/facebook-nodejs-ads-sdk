@@ -18,7 +18,6 @@ export default class StreamingReaction extends AbstractCrudObject {
     return Object.freeze({
       count: 'count',
       reaction_type: 'reaction_type',
-      id: 'id'
     });
   }
 
@@ -32,7 +31,7 @@ export default class StreamingReaction extends AbstractCrudObject {
       pride: 'PRIDE',
       sad: 'SAD',
       thankful: 'THANKFUL',
-      wow: 'WOW'
+      wow: 'WOW',
     });
   }
 }

@@ -19,7 +19,7 @@ export default class PlatformImageSource extends AbstractCrudObject {
       height: 'height',
       source: 'source',
       width: 'width',
-      id: 'id'
     });
   }
+
 }

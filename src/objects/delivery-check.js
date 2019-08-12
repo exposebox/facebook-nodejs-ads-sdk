@@ -20,7 +20,7 @@ export default class DeliveryCheck extends AbstractCrudObject {
       description: 'description',
       extra_info: 'extra_info',
       summary: 'summary',
-      id: 'id'
     });
   }
+
 }

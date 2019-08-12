@@ -45,7 +45,7 @@ export default class AdAccountRoas extends AbstractCrudObject {
       yield_3d: 'yield_3d',
       yield_7d: 'yield_7d',
       yield_90d: 'yield_90d',
-      id: 'id'
     });
   }
+
 }

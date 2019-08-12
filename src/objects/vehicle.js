@@ -59,14 +59,14 @@ export default class Vehicle extends AbstractCrudObject {
       vehicle_specifications: 'vehicle_specifications',
       vehicle_type: 'vehicle_type',
       vin: 'vin',
-      year: 'year'
+      year: 'year',
     });
   }
 
   static get Availability (): Object {
     return Object.freeze({
       available: 'AVAILABLE',
-      not_available: 'NOT_AVAILABLE'
+      not_available: 'NOT_AVAILABLE',
     });
   }
   static get BodyStyle (): Object {
@@ -79,10 +79,11 @@ export default class Vehicle extends AbstractCrudObject {
       none: 'NONE',
       other: 'OTHER',
       sedan: 'SEDAN',
+      small_car: 'SMALL_CAR',
       suv: 'SUV',
       truck: 'TRUCK',
       van: 'VAN',
-      wagon: 'WAGON'
+      wagon: 'WAGON',
     });
   }
   static get Condition (): Object {
@@ -92,7 +93,8 @@ export default class Vehicle extends AbstractCrudObject {
       good: 'GOOD',
       none: 'NONE',
       other: 'OTHER',
-      poor: 'POOR'
+      poor: 'POOR',
+      very_good: 'VERY_GOOD',
     });
   }
   static get Drivetrain (): Object {
@@ -103,7 +105,7 @@ export default class Vehicle extends AbstractCrudObject {
       none: 'NONE',
       other: 'OTHER',
       rwd: 'RWD',
-      two_wd: 'TWO_WD'
+      two_wd: 'TWO_WD',
     });
   }
   static get FuelType (): Object {
@@ -116,14 +118,14 @@ export default class Vehicle extends AbstractCrudObject {
       none: 'NONE',
       other: 'OTHER',
       petrol: 'PETROL',
-      plugin_hybrid: 'PLUGIN_HYBRID'
+      plugin_hybrid: 'PLUGIN_HYBRID',
     });
   }
   static get StateOfVehicle (): Object {
     return Object.freeze({
       cpo: 'CPO',
       new: 'NEW',
-      used: 'USED'
+      used: 'USED',
     });
   }
   static get Transmission (): Object {
@@ -131,7 +133,7 @@ export default class Vehicle extends AbstractCrudObject {
       automatic: 'AUTOMATIC',
       manual: 'MANUAL',
       none: 'NONE',
-      other: 'OTHER'
+      other: 'OTHER',
     });
   }
   static get VehicleType (): Object {
@@ -143,13 +145,23 @@ export default class Vehicle extends AbstractCrudObject {
       other: 'OTHER',
       powersport: 'POWERSPORT',
       rv_camper: 'RV_CAMPER',
-      trailer: 'TRAILER'
+      trailer: 'TRAILER',
     });
   }
 
-  get (fields, params): Vehicle {
+  
+  get (fields: Array<string>, params: Object = {}): Vehicle {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
+      params
+    );
+  }
+
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): Vehicle {
+    // $FlowFixMe : Support Generic Types
+    return super.update(
       params
     );
   }

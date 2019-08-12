@@ -19,7 +19,6 @@ export default class AdRuleFilters extends AbstractCrudObject {
       field: 'field',
       operator: 'operator',
       value: 'value',
-      id: 'id'
     });
   }
 
@@ -37,7 +36,7 @@ export default class AdRuleFilters extends AbstractCrudObject {
       not_contain: 'NOT_CONTAIN',
       not_equal: 'NOT_EQUAL',
       not_in: 'NOT_IN',
-      not_in_range: 'NOT_IN_RANGE'
+      not_in_range: 'NOT_IN_RANGE',
     });
   }
 }

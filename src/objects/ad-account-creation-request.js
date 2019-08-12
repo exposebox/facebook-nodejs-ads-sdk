@@ -7,7 +7,7 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
-import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import AdAccount from './ad-account';
 
 /**
@@ -51,7 +51,7 @@ export default class AdAccountCreationRequest extends AbstractCrudObject {
       status: 'status',
       subvertical: 'subvertical',
       time_created: 'time_created',
-      vertical: 'vertical'
+      vertical: 'vertical',
     });
   }
 
@@ -176,7 +176,7 @@ export default class AdAccountCreationRequest extends AbstractCrudObject {
       truck_and_moving: 'TRUCK_AND_MOVING',
       utilities_and_energy_equipment_and_services: 'UTILITIES_AND_ENERGY_EQUIPMENT_AND_SERVICES',
       water_and_soft_drink_and_baverage: 'WATER_AND_SOFT_DRINK_AND_BAVERAGE',
-      wireless_services: 'WIRELESS_SERVICES'
+      wireless_services: 'WIRELESS_SERVICES',
     });
   }
   static get Vertical (): Object {
@@ -200,27 +200,11 @@ export default class AdAccountCreationRequest extends AbstractCrudObject {
       retail: 'RETAIL',
       technology: 'TECHNOLOGY',
       telecom: 'TELECOM',
-      travel: 'TRAVEL'
-    });
-  }
-  static get Status (): Object {
-    return Object.freeze({
-      appeal_approved: 'APPEAL_APPROVED',
-      appeal_disapproved: 'APPEAL_DISAPPROVED',
-      appeal_pending: 'APPEAL_PENDING',
-      appeal_under_review: 'APPEAL_UNDER_REVIEW',
-      approved: 'APPROVED',
-      auto_approved: 'AUTO_APPROVED',
-      auto_disapproved: 'AUTO_DISAPPROVED',
-      cancelled: 'CANCELLED',
-      disapproved: 'DISAPPROVED',
-      pending: 'PENDING',
-      requested_change: 'REQUESTED_CHANGE',
-      under_review: 'UNDER_REVIEW'
+      travel: 'TRAVEL',
     });
   }
 
-  getAdAccounts (fields, params, fetchFirstPage = true): AdAccount {
+  getAdAccounts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdAccount,
       fields,
@@ -230,29 +214,18 @@ export default class AdAccountCreationRequest extends AbstractCrudObject {
     );
   }
 
-  createVietnam (fields, params): AdAccountCreationRequest {
-    return this.createEdge(
-      '/vietnam',
-      fields,
-      params,
-      AdAccountCreationRequest
-    );
-  }
-
-  delete (fields, params): AbstractObject {
-    return super.delete(
-      params
-    );
-  }
-
-  get (fields, params): AdAccountCreationRequest {
+  
+  get (fields: Array<string>, params: Object = {}): AdAccountCreationRequest {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): AdAccountCreationRequest {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): AdAccountCreationRequest {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

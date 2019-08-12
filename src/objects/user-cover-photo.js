@@ -19,7 +19,7 @@ export default class UserCoverPhoto extends AbstractCrudObject {
       offset_x: 'offset_x',
       offset_y: 'offset_y',
       source: 'source',
-      id: 'id'
     });
   }
+
 }

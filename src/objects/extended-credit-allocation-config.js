@@ -26,7 +26,7 @@ export default class ExtendedCreditAllocationConfig extends AbstractCrudObject {
       receiving_business: 'receiving_business',
       receiving_credential: 'receiving_credential',
       request_status: 'request_status',
-      send_bill_to: 'send_bill_to'
+      send_bill_to: 'send_bill_to',
     });
   }
 
@@ -34,29 +34,33 @@ export default class ExtendedCreditAllocationConfig extends AbstractCrudObject {
     return Object.freeze({
       msa: 'MSA',
       normal: 'Normal',
-      sequential: 'Sequential'
+      sequential: 'Sequential',
     });
   }
   static get PartitionType (): Object {
     return Object.freeze({
       auth: 'AUTH',
-      fixed: 'FIXED'
+      fixed: 'FIXED',
     });
   }
   static get SendBillTo (): Object {
     return Object.freeze({
       advertiser: 'Advertiser',
-      agency: 'Agency'
+      agency: 'Agency',
     });
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): ExtendedCreditAllocationConfig {
+  
+  get (fields: Array<string>, params: Object = {}): ExtendedCreditAllocationConfig {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

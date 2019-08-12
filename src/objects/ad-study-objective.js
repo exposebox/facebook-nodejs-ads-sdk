@@ -8,12 +8,14 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import AdPlacePageSet from './ad-place-page-set';
 import AdsPixel from './ads-pixel';
 import Application from './application';
 import CustomConversion from './custom-conversion';
 import OfflineConversionDataSet from './offline-conversion-data-set';
 import OffsitePixel from './offsite-pixel';
+import PartnerStudy from './partner-study';
 
 /**
  * AdStudyObjective
@@ -23,13 +25,12 @@ import OffsitePixel from './offsite-pixel';
 export default class AdStudyObjective extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
-      custom_attributes: 'custom_attributes',
       id: 'id',
       is_primary: 'is_primary',
       last_updated_results: 'last_updated_results',
       name: 'name',
       results: 'results',
-      type: 'type'
+      type: 'type',
     });
   }
 
@@ -43,11 +44,11 @@ export default class AdStudyObjective extends AbstractCrudObject {
       nonsales: 'NONSALES',
       partner: 'PARTNER',
       sales: 'SALES',
-      telco: 'TELCO'
+      telco: 'TELCO',
     });
   }
 
-  getAdPlacePageSets (fields, params, fetchFirstPage = true): AdPlacePageSet {
+  getAdPlacePageSets (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdPlacePageSet,
       fields,
@@ -57,7 +58,7 @@ export default class AdStudyObjective extends AbstractCrudObject {
     );
   }
 
-  getAdsPixels (fields, params, fetchFirstPage = true): AdsPixel {
+  getAdsPixels (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdsPixel,
       fields,
@@ -67,7 +68,7 @@ export default class AdStudyObjective extends AbstractCrudObject {
     );
   }
 
-  getApplications (fields, params, fetchFirstPage = true): Application {
+  getApplications (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Application,
       fields,
@@ -77,7 +78,7 @@ export default class AdStudyObjective extends AbstractCrudObject {
     );
   }
 
-  getCustomConversions (fields, params, fetchFirstPage = true): CustomConversion {
+  getCustomConversions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       CustomConversion,
       fields,
@@ -87,7 +88,7 @@ export default class AdStudyObjective extends AbstractCrudObject {
     );
   }
 
-  getOfflineConversionDataSets (fields, params, fetchFirstPage = true): OfflineConversionDataSet {
+  getOfflineConversionDataSets (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       OfflineConversionDataSet,
       fields,
@@ -97,7 +98,7 @@ export default class AdStudyObjective extends AbstractCrudObject {
     );
   }
 
-  getOffsitePixels (fields, params, fetchFirstPage = true): OffsitePixel {
+  getOffsitePixels (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       OffsitePixel,
       fields,
@@ -107,20 +108,36 @@ export default class AdStudyObjective extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
+  getPartnerStudies (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      PartnerStudy,
+      fields,
+      params,
+      fetchFirstPage,
+      '/partnerstudies'
+    );
+  }
+
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): AdStudyObjective {
+  
+  get (fields: Array<string>, params: Object = {}): AdStudyObjective {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): AdStudyObjective {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): AdStudyObjective {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

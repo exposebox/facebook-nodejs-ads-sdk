@@ -18,7 +18,7 @@ export default class RevSharePolicy extends AbstractCrudObject {
     return Object.freeze({
       policy_id: 'policy_id',
       policy_name: 'policy_name',
-      id: 'id'
     });
   }
+
 }

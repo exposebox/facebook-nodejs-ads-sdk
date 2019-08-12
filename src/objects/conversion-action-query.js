@@ -42,7 +42,7 @@ export default class ConversionActionQuery extends AbstractCrudObject {
       question_creator: 'question.creator',
       response: 'response',
       subtype: 'subtype',
-      id: 'id'
     });
   }
+
 }

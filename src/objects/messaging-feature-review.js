@@ -18,7 +18,7 @@ export default class MessagingFeatureReview extends AbstractCrudObject {
     return Object.freeze({
       feature: 'feature',
       status: 'status',
-      id: 'id'
     });
   }
+
 }

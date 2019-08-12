@@ -19,7 +19,7 @@ export default class AdAccountRecommendedCamapaignBudget extends AbstractCrudObj
       daily: 'daily',
       lifetime: 'lifetime',
       objective: 'objective',
-      id: 'id'
     });
   }
+
 }

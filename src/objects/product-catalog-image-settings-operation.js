@@ -17,7 +17,7 @@ export default class ProductCatalogImageSettingsOperation extends AbstractCrudOb
   static get Fields () {
     return Object.freeze({
       transformation_type: 'transformation_type',
-      id: 'id'
     });
   }
+
 }

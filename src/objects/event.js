@@ -8,12 +8,11 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import Profile from './profile';
-import User from './user';
-import NullNode from './null-node';
-import Comment from './comment';
+import LiveVideo from './live-video';
 import Photo from './photo';
-import AdVideo from './ad-video';
+import ProfilePictureSource from './profile-picture-source';
 
 /**
  * Event
@@ -52,50 +51,45 @@ export default class Event extends AbstractCrudObject {
       ticketing_terms_uri: 'ticketing_terms_uri',
       timezone: 'timezone',
       type: 'type',
-      updated_time: 'updated_time'
+      updated_time: 'updated_time',
     });
   }
 
+  static get Category (): Object {
+    return Object.freeze({
+      art_event: 'ART_EVENT',
+      book_event: 'BOOK_EVENT',
+      class_event: 'CLASS_EVENT',
+      comedy_event: 'COMEDY_EVENT',
+      conference_event: 'CONFERENCE_EVENT',
+      dance_event: 'DANCE_EVENT',
+      dining_event: 'DINING_EVENT',
+      family_event: 'FAMILY_EVENT',
+      festival_event: 'FESTIVAL_EVENT',
+      fitness: 'FITNESS',
+      food_tasting: 'FOOD_TASTING',
+      fundraiser: 'FUNDRAISER',
+      lecture: 'LECTURE',
+      meetup: 'MEETUP',
+      movie_event: 'MOVIE_EVENT',
+      music_event: 'MUSIC_EVENT',
+      neighborhood: 'NEIGHBORHOOD',
+      nightlife: 'NIGHTLIFE',
+      other: 'OTHER',
+      religious_event: 'RELIGIOUS_EVENT',
+      shopping: 'SHOPPING',
+      sports_event: 'SPORTS_EVENT',
+      theater_event: 'THEATER_EVENT',
+      volunteering: 'VOLUNTEERING',
+      workshop: 'WORKSHOP',
+    });
+  }
   static get Type (): Object {
     return Object.freeze({
       community: 'community',
       group: 'group',
       private: 'private',
-      public: 'public'
-    });
-  }
-  static get Projection (): Object {
-    return Object.freeze({
-      cubemap: 'CUBEMAP',
-      equirectangular: 'EQUIRECTANGULAR',
-      half_equirectangular: 'HALF_EQUIRECTANGULAR'
-    });
-  }
-  static get SpatialAudioFormat (): Object {
-    return Object.freeze({
-      ambix_4: 'ambiX_4'
-    });
-  }
-  static get Status (): Object {
-    return Object.freeze({
-      live_now: 'LIVE_NOW',
-      scheduled_canceled: 'SCHEDULED_CANCELED',
-      scheduled_live: 'SCHEDULED_LIVE',
-      scheduled_unpublished: 'SCHEDULED_UNPUBLISHED',
-      unpublished: 'UNPUBLISHED'
-    });
-  }
-  static get StereoscopicMode (): Object {
-    return Object.freeze({
-      left_right: 'LEFT_RIGHT',
-      mono: 'MONO',
-      top_bottom: 'TOP_BOTTOM'
-    });
-  }
-  static get StreamType (): Object {
-    return Object.freeze({
-      ambient: 'AMBIENT',
-      regular: 'REGULAR'
+      public: 'public',
     });
   }
   static get EventStateFilter (): Object {
@@ -103,24 +97,24 @@ export default class Event extends AbstractCrudObject {
       canceled: 'canceled',
       draft: 'draft',
       published: 'published',
-      scheduled_draft_for_publication: 'scheduled_draft_for_publication'
+      scheduled_draft_for_publication: 'scheduled_draft_for_publication',
     });
   }
   static get TimeFilter (): Object {
     return Object.freeze({
       past: 'past',
-      upcoming: 'upcoming'
+      upcoming: 'upcoming',
     });
   }
   static get PromotableEventTypes (): Object {
     return Object.freeze({
       offsite_ticket: 'OFFSITE_TICKET',
       onsite_ticket: 'ONSITE_TICKET',
-      rsvp: 'RSVP'
+      rsvp: 'RSVP',
     });
   }
 
-  getAdmins (fields, params, fetchFirstPage = true): Profile {
+  getAdmins (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Profile,
       fields,
@@ -130,151 +124,25 @@ export default class Event extends AbstractCrudObject {
     );
   }
 
-  getAttending (fields, params, fetchFirstPage = true): User {
-    return this.getEdge(
-      User,
-      fields,
-      params,
-      fetchFirstPage,
-      '/attending'
-    );
-  }
-
-  createAttending (fields, params): Event {
-    return this.createEdge(
-      '/attending',
-      fields,
-      params,
-      Event
-    );
-  }
-
-  getComments (fields, params, fetchFirstPage = true): NullNode {
-    return this.getEdge(
-      NullNode,
-      fields,
-      params,
-      fetchFirstPage,
-      '/comments'
-    );
-  }
-
-  createComment (fields, params): Comment {
-    return this.createEdge(
-      '/comments',
-      fields,
-      params,
-      Comment
-    );
-  }
-
-  getDeclined (fields, params, fetchFirstPage = true): User {
-    return this.getEdge(
-      User,
-      fields,
-      params,
-      fetchFirstPage,
-      '/declined'
-    );
-  }
-
-  createDeclined (fields, params): Event {
-    return this.createEdge(
-      '/declined',
-      fields,
-      params,
-      Event
-    );
-  }
-
-  getFeed (fields, params, fetchFirstPage = true): NullNode {
-    return this.getEdge(
-      NullNode,
-      fields,
-      params,
-      fetchFirstPage,
-      '/feed'
-    );
-  }
-
-  createFeed (fields, params): AbstractObject {
+  createFeed (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
     return this.createEdge(
       '/feed',
       fields,
-      params
-
-    );
-  }
-
-  getInterested (fields, params, fetchFirstPage = true): User {
-    return this.getEdge(
-      User,
-      fields,
       params,
-      fetchFirstPage,
-      '/interested'
+      
     );
   }
 
-  getLiveVideos (fields, params, fetchFirstPage = true): NullNode {
-    return this.getEdge(
-      NullNode,
-      fields,
-      params,
-      fetchFirstPage,
-      '/live_videos'
-    );
-  }
-
-  createLiveVideo (fields, params): Event {
+  createLiveVideo (fields: Array<string>, params: Object = {}): Promise<LiveVideo> {
     return this.createEdge(
       '/live_videos',
       fields,
       params,
-      Event
+      LiveVideo
     );
   }
 
-  getMaybe (fields, params, fetchFirstPage = true): User {
-    return this.getEdge(
-      User,
-      fields,
-      params,
-      fetchFirstPage,
-      '/maybe'
-    );
-  }
-
-  createMaybe (fields, params): Event {
-    return this.createEdge(
-      '/maybe',
-      fields,
-      params,
-      Event
-    );
-  }
-
-  getNoreply (fields, params, fetchFirstPage = true): User {
-    return this.getEdge(
-      User,
-      fields,
-      params,
-      fetchFirstPage,
-      '/noreply'
-    );
-  }
-
-  getPhotos (fields, params, fetchFirstPage = true): NullNode {
-    return this.getEdge(
-      NullNode,
-      fields,
-      params,
-      fetchFirstPage,
-      '/photos'
-    );
-  }
-
-  createPhoto (fields, params): Photo {
+  createPhoto (fields: Array<string>, params: Object = {}): Promise<Photo> {
     return this.createEdge(
       '/photos',
       fields,
@@ -283,9 +151,9 @@ export default class Event extends AbstractCrudObject {
     );
   }
 
-  getPicture (fields, params, fetchFirstPage = true): NullNode {
+  getPicture (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
-      NullNode,
+      ProfilePictureSource,
       fields,
       params,
       fetchFirstPage,
@@ -293,17 +161,7 @@ export default class Event extends AbstractCrudObject {
     );
   }
 
-  getPosts (fields, params, fetchFirstPage = true): NullNode {
-    return this.getEdge(
-      NullNode,
-      fields,
-      params,
-      fetchFirstPage,
-      '/posts'
-    );
-  }
-
-  getRoles (fields, params, fetchFirstPage = true): Profile {
+  getRoles (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Profile,
       fields,
@@ -313,26 +171,9 @@ export default class Event extends AbstractCrudObject {
     );
   }
 
-  getVideos (fields, params, fetchFirstPage = true): NullNode {
-    return this.getEdge(
-      NullNode,
-      fields,
-      params,
-      fetchFirstPage,
-      '/videos'
-    );
-  }
-
-  createVideo (fields, params): AdVideo {
-    return this.createEdge(
-      '/videos',
-      fields,
-      params,
-      AdVideo
-    );
-  }
-
-  get (fields, params): Event {
+  
+  get (fields: Array<string>, params: Object = {}): Event {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

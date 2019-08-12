@@ -21,7 +21,7 @@ export default class PageRestaurantSpecialties extends AbstractCrudObject {
       dinner: 'dinner',
       drinks: 'drinks',
       lunch: 'lunch',
-      id: 'id'
     });
   }
+
 }

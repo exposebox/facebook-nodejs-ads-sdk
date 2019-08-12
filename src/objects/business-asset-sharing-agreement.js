@@ -21,7 +21,7 @@ export default class BusinessAssetSharingAgreement extends AbstractCrudObject {
       recipient: 'recipient',
       relationship_type: 'relationship_type',
       request_status: 'request_status',
-      request_type: 'request_type'
+      request_type: 'request_type',
     });
   }
 
@@ -30,18 +30,22 @@ export default class BusinessAssetSharingAgreement extends AbstractCrudObject {
       approve: 'APPROVE',
       decline: 'DECLINE',
       expired: 'EXPIRED',
-      in_progress: 'IN_PROGRESS'
+      in_progress: 'IN_PROGRESS',
     });
   }
 
-  get (fields, params): BusinessAssetSharingAgreement {
+  
+  get (fields: Array<string>, params: Object = {}): BusinessAssetSharingAgreement {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): BusinessAssetSharingAgreement {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): BusinessAssetSharingAgreement {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

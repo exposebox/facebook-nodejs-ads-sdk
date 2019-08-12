@@ -20,7 +20,7 @@ export default class ProductFeedRule extends AbstractCrudObject {
       attribute: 'attribute',
       id: 'id',
       params: 'params',
-      rule_type: 'rule_type'
+      rule_type: 'rule_type',
     });
   }
 
@@ -30,24 +30,30 @@ export default class ProductFeedRule extends AbstractCrudObject {
       letter_case_rule: 'letter_case_rule',
       mapping_rule: 'mapping_rule',
       regex_replace_rule: 'regex_replace_rule',
-      value_mapping_rule: 'value_mapping_rule'
+      value_mapping_rule: 'value_mapping_rule',
     });
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): ProductFeedRule {
+  
+  get (fields: Array<string>, params: Object = {}): ProductFeedRule {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): ProductFeedRule {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): ProductFeedRule {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

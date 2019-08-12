@@ -23,7 +23,7 @@ export default class TargetingGeoLocationCity extends AbstractCrudObject {
       radius: 'radius',
       region: 'region',
       region_id: 'region_id',
-      id: 'id'
     });
   }
+
 }

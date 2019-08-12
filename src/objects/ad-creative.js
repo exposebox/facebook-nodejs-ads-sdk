@@ -8,6 +8,7 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import AdPreview from './ad-preview';
 
 /**
@@ -45,6 +46,7 @@ export default class AdCreative extends AbstractCrudObject {
       instagram_actor_id: 'instagram_actor_id',
       instagram_permalink_url: 'instagram_permalink_url',
       instagram_story_id: 'instagram_story_id',
+      interactive_components_spec: 'interactive_components_spec',
       link_deep_link_url: 'link_deep_link_url',
       link_og_id: 'link_og_id',
       link_url: 'link_url',
@@ -69,7 +71,7 @@ export default class AdCreative extends AbstractCrudObject {
       title: 'title',
       url_tags: 'url_tags',
       use_page_actor_override: 'use_page_actor_override',
-      video_id: 'video_id'
+      video_id: 'video_id',
     });
   }
 
@@ -77,7 +79,7 @@ export default class AdCreative extends AbstractCrudObject {
     return Object.freeze({
       deeplink_with_appstore_fallback: 'deeplink_with_appstore_fallback',
       deeplink_with_web_fallback: 'deeplink_with_web_fallback',
-      web_only: 'web_only'
+      web_only: 'web_only',
     });
   }
   static get CallToActionType (): Object {
@@ -90,11 +92,14 @@ export default class AdCreative extends AbstractCrudObject {
       buy_tickets: 'BUY_TICKETS',
       call: 'CALL',
       call_me: 'CALL_ME',
+      contact: 'CONTACT',
       contact_us: 'CONTACT_US',
       donate: 'DONATE',
       donate_now: 'DONATE_NOW',
       download: 'DOWNLOAD',
       event_rsvp: 'EVENT_RSVP',
+      find_a_group: 'FIND_A_GROUP',
+      find_your_groups: 'FIND_YOUR_GROUPS',
       follow_news_storyline: 'FOLLOW_NEWS_STORYLINE',
       get_directions: 'GET_DIRECTIONS',
       get_offer: 'GET_OFFER',
@@ -121,6 +126,7 @@ export default class AdCreative extends AbstractCrudObject {
       share: 'SHARE',
       shop_now: 'SHOP_NOW',
       sign_up: 'SIGN_UP',
+      sotto_subscribe: 'SOTTO_SUBSCRIBE',
       subscribe: 'SUBSCRIBE',
       update_app: 'UPDATE_APP',
       use_app: 'USE_APP',
@@ -130,7 +136,7 @@ export default class AdCreative extends AbstractCrudObject {
       watch_more: 'WATCH_MORE',
       watch_video: 'WATCH_VIDEO',
       whatsapp_message: 'WHATSAPP_MESSAGE',
-      woodhenge_support: 'WOODHENGE_SUPPORT'
+      woodhenge_support: 'WOODHENGE_SUPPORT',
     });
   }
   static get ObjectType (): Object {
@@ -145,28 +151,28 @@ export default class AdCreative extends AbstractCrudObject {
       share: 'SHARE',
       status: 'STATUS',
       store_item: 'STORE_ITEM',
-      video: 'VIDEO'
+      video: 'VIDEO',
     });
   }
   static get Status (): Object {
     return Object.freeze({
       active: 'ACTIVE',
       deleted: 'DELETED',
-      pending_process: 'PENDING_PROCESS',
-      with_issues: 'WITH_ISSUES'
+      in_process: 'IN_PROCESS',
+      with_issues: 'WITH_ISSUES',
     });
   }
   static get AuthorizationCategory (): Object {
     return Object.freeze({
       none: 'NONE',
-      political: 'POLITICAL'
+      political: 'POLITICAL',
     });
   }
   static get CategorizationCriteria (): Object {
     return Object.freeze({
       brand: 'brand',
       category: 'category',
-      product_type: 'product_type'
+      product_type: 'product_type',
     });
   }
   static get CategoryMediaSource (): Object {
@@ -174,30 +180,30 @@ export default class AdCreative extends AbstractCrudObject {
       category: 'CATEGORY',
       mixed: 'MIXED',
       products_collage: 'PRODUCTS_COLLAGE',
-      products_slideshow: 'PRODUCTS_SLIDESHOW'
+      products_slideshow: 'PRODUCTS_SLIDESHOW',
     });
   }
   static get DynamicAdVoice (): Object {
     return Object.freeze({
       dynamic: 'DYNAMIC',
-      story_owner: 'STORY_OWNER'
+      story_owner: 'STORY_OWNER',
     });
   }
   static get Operator (): Object {
     return Object.freeze({
       all: 'ALL',
-      any: 'ANY'
+      any: 'ANY',
     });
   }
 
-  deleteAdLabels (params): AbstractObject {
+  deleteAdLabels (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/adlabels',
       params
     );
   }
 
-  createAdLabel (fields, params): AdCreative {
+  createAdLabel (fields: Array<string>, params: Object = {}): Promise<AdCreative> {
     return this.createEdge(
       '/adlabels',
       fields,
@@ -206,7 +212,7 @@ export default class AdCreative extends AbstractCrudObject {
     );
   }
 
-  getPreviews (fields, params, fetchFirstPage = true): AdPreview {
+  getPreviews (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdPreview,
       fields,
@@ -216,20 +222,26 @@ export default class AdCreative extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): AdCreative {
+  
+  get (fields: Array<string>, params: Object = {}): AdCreative {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): AdCreative {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): AdCreative {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

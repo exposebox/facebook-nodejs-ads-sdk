@@ -19,7 +19,7 @@ export default class ProductVariant extends AbstractCrudObject {
       label: 'label',
       options: 'options',
       product_field: 'product_field',
-      id: 'id'
     });
   }
+
 }

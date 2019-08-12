@@ -7,6 +7,7 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
+import Cursor from './../cursor';
 import ProductFeedUploadError from './product-feed-upload-error';
 
 /**
@@ -29,7 +30,7 @@ export default class ProductFeedUpload extends AbstractCrudObject {
       num_persisted_items: 'num_persisted_items',
       start_time: 'start_time',
       url: 'url',
-      warning_count: 'warning_count'
+      warning_count: 'warning_count',
     });
   }
 
@@ -38,11 +39,11 @@ export default class ProductFeedUpload extends AbstractCrudObject {
       manual_upload: 'Manual Upload',
       reupload_last_file: 'Reupload Last File',
       server_fetch: 'Server Fetch',
-      user_initiated_server_fetch: 'User initiated server fetch'
+      user_initiated_server_fetch: 'User initiated server fetch',
     });
   }
 
-  createErrorReport (fields, params): ProductFeedUpload {
+  createErrorReport (fields: Array<string>, params: Object = {}): Promise<ProductFeedUpload> {
     return this.createEdge(
       '/error_report',
       fields,
@@ -51,7 +52,7 @@ export default class ProductFeedUpload extends AbstractCrudObject {
     );
   }
 
-  getErrors (fields, params, fetchFirstPage = true): ProductFeedUploadError {
+  getErrors (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       ProductFeedUploadError,
       fields,
@@ -61,7 +62,9 @@ export default class ProductFeedUpload extends AbstractCrudObject {
     );
   }
 
-  get (fields, params): ProductFeedUpload {
+  
+  get (fields: Array<string>, params: Object = {}): ProductFeedUpload {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

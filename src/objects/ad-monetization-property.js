@@ -7,6 +7,7 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
+import Cursor from './../cursor';
 import AdNetworkAnalyticsSyncQueryResult from './ad-network-analytics-sync-query-result';
 import AdNetworkAnalyticsAsyncQueryResult from './ad-network-analytics-async-query-result';
 
@@ -18,88 +19,12 @@ import AdNetworkAnalyticsAsyncQueryResult from './ad-network-analytics-async-que
 export default class AdMonetizationProperty extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
-      id: 'id'
+      id: 'id',
     });
   }
 
-  static get AggregationPeriod (): Object {
-    return Object.freeze({
-      day: 'DAY',
-      hour: 'HOUR',
-      total: 'TOTAL'
-    });
-  }
-  static get Breakdowns (): Object {
-    return Object.freeze({
-      age: 'AGE',
-      app: 'APP',
-      clicked_view_tag: 'CLICKED_VIEW_TAG',
-      country: 'COUNTRY',
-      deal: 'DEAL',
-      deal_ad: 'DEAL_AD',
-      deal_page: 'DEAL_PAGE',
-      delivery_method: 'DELIVERY_METHOD',
-      display_format: 'DISPLAY_FORMAT',
-      fail_reason: 'FAIL_REASON',
-      gender: 'GENDER',
-      placement: 'PLACEMENT',
-      platform: 'PLATFORM',
-      property: 'PROPERTY',
-      sdk_version: 'SDK_VERSION'
-    });
-  }
-  static get Metrics (): Object {
-    return Object.freeze({
-      fb_ad_network_bidding_bid_rate: 'FB_AD_NETWORK_BIDDING_BID_RATE',
-      fb_ad_network_bidding_request: 'FB_AD_NETWORK_BIDDING_REQUEST',
-      fb_ad_network_bidding_response: 'FB_AD_NETWORK_BIDDING_RESPONSE',
-      fb_ad_network_bidding_revenue: 'FB_AD_NETWORK_BIDDING_REVENUE',
-      fb_ad_network_bidding_win_rate: 'FB_AD_NETWORK_BIDDING_WIN_RATE',
-      fb_ad_network_click: 'FB_AD_NETWORK_CLICK',
-      fb_ad_network_click_value_score: 'FB_AD_NETWORK_CLICK_VALUE_SCORE',
-      fb_ad_network_click_value_score_denominator: 'FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR',
-      fb_ad_network_click_value_score_numerator: 'FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR',
-      fb_ad_network_cpm: 'FB_AD_NETWORK_CPM',
-      fb_ad_network_ctr: 'FB_AD_NETWORK_CTR',
-      fb_ad_network_direct_publisher_bill: 'FB_AD_NETWORK_DIRECT_PUBLISHER_BILL',
-      fb_ad_network_direct_total_revenue: 'FB_AD_NETWORK_DIRECT_TOTAL_REVENUE',
-      fb_ad_network_fast_click_denominator: 'FB_AD_NETWORK_FAST_CLICK_DENOMINATOR',
-      fb_ad_network_fast_click_numerator: 'FB_AD_NETWORK_FAST_CLICK_NUMERATOR',
-      fb_ad_network_fast_click_rate: 'FB_AD_NETWORK_FAST_CLICK_RATE',
-      fb_ad_network_fast_return_denominator: 'FB_AD_NETWORK_FAST_RETURN_DENOMINATOR',
-      fb_ad_network_fast_return_numerator: 'FB_AD_NETWORK_FAST_RETURN_NUMERATOR',
-      fb_ad_network_fast_return_rate: 'FB_AD_NETWORK_FAST_RETURN_RATE',
-      fb_ad_network_filled_request: 'FB_AD_NETWORK_FILLED_REQUEST',
-      fb_ad_network_fill_rate: 'FB_AD_NETWORK_FILL_RATE',
-      fb_ad_network_imp: 'FB_AD_NETWORK_IMP',
-      fb_ad_network_no_bid: 'FB_AD_NETWORK_NO_BID',
-      fb_ad_network_no_fill: 'FB_AD_NETWORK_NO_FILL',
-      fb_ad_network_request: 'FB_AD_NETWORK_REQUEST',
-      fb_ad_network_revenue: 'FB_AD_NETWORK_REVENUE',
-      fb_ad_network_show_rate: 'FB_AD_NETWORK_SHOW_RATE',
-      fb_ad_network_video_guarantee_revenue: 'FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE',
-      fb_ad_network_video_mrc: 'FB_AD_NETWORK_VIDEO_MRC',
-      fb_ad_network_video_mrc_rate: 'FB_AD_NETWORK_VIDEO_MRC_RATE',
-      fb_ad_network_video_view: 'FB_AD_NETWORK_VIDEO_VIEW',
-      fb_ad_network_video_view_rate: 'FB_AD_NETWORK_VIDEO_VIEW_RATE',
-      fb_ad_network_win_rate: 'FB_AD_NETWORK_WIN_RATE'
-    });
-  }
-  static get OrderingColumn (): Object {
-    return Object.freeze({
-      metric: 'METRIC',
-      time: 'TIME',
-      value: 'VALUE'
-    });
-  }
-  static get OrderingType (): Object {
-    return Object.freeze({
-      ascending: 'ASCENDING',
-      descending: 'DESCENDING'
-    });
-  }
 
-  getAdNetworkAnalytics (fields, params, fetchFirstPage = true): AdNetworkAnalyticsSyncQueryResult {
+  getAdNetworkAnalytics (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdNetworkAnalyticsSyncQueryResult,
       fields,
@@ -109,7 +34,7 @@ export default class AdMonetizationProperty extends AbstractCrudObject {
     );
   }
 
-  createAdNetworkAnalytic (fields, params): AdMonetizationProperty {
+  createAdNetworkAnalytic (fields: Array<string>, params: Object = {}): Promise<AdMonetizationProperty> {
     return this.createEdge(
       '/adnetworkanalytics',
       fields,
@@ -118,7 +43,7 @@ export default class AdMonetizationProperty extends AbstractCrudObject {
     );
   }
 
-  getAdNetworkAnalyticsResults (fields, params, fetchFirstPage = true): AdNetworkAnalyticsAsyncQueryResult {
+  getAdNetworkAnalyticsResults (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdNetworkAnalyticsAsyncQueryResult,
       fields,
@@ -128,7 +53,9 @@ export default class AdMonetizationProperty extends AbstractCrudObject {
     );
   }
 
-  get (fields, params): AdMonetizationProperty {
+  
+  get (fields: Array<string>, params: Object = {}): AdMonetizationProperty {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

@@ -18,7 +18,7 @@ export default class UserDevice extends AbstractCrudObject {
     return Object.freeze({
       hardware: 'hardware',
       os: 'os',
-      id: 'id'
     });
   }
+
 }

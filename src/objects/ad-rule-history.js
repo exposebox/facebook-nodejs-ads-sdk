@@ -24,7 +24,6 @@ export default class AdRuleHistory extends AbstractCrudObject {
       results: 'results',
       schedule_spec: 'schedule_spec',
       timestamp: 'timestamp',
-      id: 'id'
     });
   }
 
@@ -40,7 +39,7 @@ export default class AdRuleHistory extends AbstractCrudObject {
       message_sent: 'MESSAGE_SENT',
       not_changed: 'NOT_CHANGED',
       paused: 'PAUSED',
-      unpaused: 'UNPAUSED'
+      unpaused: 'UNPAUSED',
     });
   }
 }

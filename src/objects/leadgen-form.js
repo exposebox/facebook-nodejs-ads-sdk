@@ -7,7 +7,7 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
-import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import Lead from './lead';
 
 /**
@@ -47,7 +47,7 @@ export default class LeadgenForm extends AbstractCrudObject {
       status: 'status',
       tcpa_compliance: 'tcpa_compliance',
       thank_you_page: 'thank_you_page',
-      tracking_parameters: 'tracking_parameters'
+      tracking_parameters: 'tracking_parameters',
     });
   }
 
@@ -56,7 +56,7 @@ export default class LeadgenForm extends AbstractCrudObject {
       active: 'ACTIVE',
       archived: 'ARCHIVED',
       deleted: 'DELETED',
-      draft: 'DRAFT'
+      draft: 'DRAFT',
     });
   }
   static get Locale (): Object {
@@ -91,11 +91,11 @@ export default class LeadgenForm extends AbstractCrudObject {
       vi_vn: 'VI_VN',
       zh_cn: 'ZH_CN',
       zh_hk: 'ZH_HK',
-      zh_tw: 'ZH_TW'
+      zh_tw: 'ZH_TW',
     });
   }
 
-  getLeads (fields, params, fetchFirstPage = true): Lead {
+  getLeads (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Lead,
       fields,
@@ -105,16 +105,7 @@ export default class LeadgenForm extends AbstractCrudObject {
     );
   }
 
-  createLead (fields, params): Lead {
-    return this.createEdge(
-      '/leads',
-      fields,
-      params,
-      Lead
-    );
-  }
-
-  getTestLeads (fields, params, fetchFirstPage = true): Lead {
+  getTestLeads (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Lead,
       fields,
@@ -124,7 +115,7 @@ export default class LeadgenForm extends AbstractCrudObject {
     );
   }
 
-  createTestLead (fields, params): Lead {
+  createTestLead (fields: Array<string>, params: Object = {}): Promise<Lead> {
     return this.createEdge(
       '/test_leads',
       fields,
@@ -133,20 +124,18 @@ export default class LeadgenForm extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
-    return super.delete(
-      params
-    );
-  }
-
-  get (fields, params): LeadgenForm {
+  
+  get (fields: Array<string>, params: Object = {}): LeadgenForm {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): LeadgenForm {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): LeadgenForm {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

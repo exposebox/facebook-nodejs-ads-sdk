@@ -21,7 +21,7 @@ export default class BusinessOwnedObjectOnBehalfOfRequest extends AbstractCrudOb
       id: 'id',
       receiving_business: 'receiving_business',
       requesting_business: 'requesting_business',
-      status: 'status'
+      status: 'status',
     });
   }
 
@@ -30,17 +30,21 @@ export default class BusinessOwnedObjectOnBehalfOfRequest extends AbstractCrudOb
       approve: 'APPROVE',
       decline: 'DECLINE',
       expired: 'EXPIRED',
-      in_progress: 'IN_PROGRESS'
+      in_progress: 'IN_PROGRESS',
     });
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): BusinessOwnedObjectOnBehalfOfRequest {
+  
+  get (fields: Array<string>, params: Object = {}): BusinessOwnedObjectOnBehalfOfRequest {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

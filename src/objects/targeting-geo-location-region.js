@@ -19,7 +19,7 @@ export default class TargetingGeoLocationRegion extends AbstractCrudObject {
       country: 'country',
       key: 'key',
       name: 'name',
-      id: 'id'
     });
   }
+
 }

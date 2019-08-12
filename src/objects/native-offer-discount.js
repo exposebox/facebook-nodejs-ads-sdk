@@ -22,7 +22,7 @@ export default class NativeOfferDiscount extends AbstractCrudObject {
       type: 'type',
       value1: 'value1',
       value2: 'value2',
-      id: 'id'
     });
   }
+
 }

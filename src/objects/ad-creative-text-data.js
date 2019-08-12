@@ -17,7 +17,7 @@ export default class AdCreativeTextData extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
       message: 'message',
-      id: 'id'
     });
   }
+
 }

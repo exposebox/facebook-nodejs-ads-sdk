@@ -19,7 +19,7 @@ export default class AdAssetFeedSpecBody extends AbstractCrudObject {
       adlabels: 'adlabels',
       text: 'text',
       url_tags: 'url_tags',
-      id: 'id'
     });
   }
+
 }

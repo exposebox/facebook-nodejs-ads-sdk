@@ -21,7 +21,7 @@ export default class AdEntityTargetSpend extends AbstractCrudObject {
       is_accurate: 'is_accurate',
       is_prorated: 'is_prorated',
       is_updating: 'is_updating',
-      id: 'id'
     });
   }
+
 }

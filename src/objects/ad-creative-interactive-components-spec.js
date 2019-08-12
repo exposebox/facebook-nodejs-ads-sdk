@@ -17,7 +17,7 @@ export default class AdCreativeInteractiveComponentsSpec extends AbstractCrudObj
   static get Fields () {
     return Object.freeze({
       components: 'components',
-      id: 'id'
     });
   }
+
 }
